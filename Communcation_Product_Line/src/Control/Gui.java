@@ -165,3 +165,4 @@ public class Gui {
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }
+

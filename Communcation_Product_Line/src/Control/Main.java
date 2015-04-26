@@ -9,7 +9,10 @@ public class Main {
 		// TODO Auto-generated method stub#
 				try {
 					Gui window = new Gui();
+
 					window.init();
+
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
