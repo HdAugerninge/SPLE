@@ -15,12 +15,16 @@ import javax.swing.JSeparator;
 
 public class ChatTab extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private JPanel panel;
 	private JTextPane textPaneChat, textPaneInput;
 	
 	public ChatTab(String name) {
-		super(true);
+//		super(true);
 		System.out.println(name + " created");
 		this.name = name;
 		// TODO Auto-generated constructor stub
@@ -44,8 +48,8 @@ public class ChatTab extends JPanel{
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 148, 430, 4);
 		panel.add(horizontalStrut);
-		panel.setVisible(true);
-		panel.update(getGraphics());
+//		panel.setVisible(true);
+//		panel.update(getGraphics());
 	}
 	
 	public String getChat (){
