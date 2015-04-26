@@ -14,7 +14,6 @@ public class Main {
 			public void run() {
 				try {
 					Gui window = new Gui();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

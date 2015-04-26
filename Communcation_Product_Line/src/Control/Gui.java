@@ -29,14 +29,11 @@ public class Gui {
 
 	public JFrame frame;
 	public JTextField textSend;
-	
 	public Gui() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					Gui window = new Gui();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,11 +50,11 @@ public class Gui {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Image imgConfig = new ImageIcon(this.getClass().getResource("/19-gear-icon-16.png")).getImage();
-		Image imgAvatar = new ImageIcon(this.getClass().getResource("/avatar-default-icon.png")).getImage();
-		Image imgSend = new ImageIcon(this.getClass().getResource("/paper-plane-icon-16.png")).getImage();
-		Image imgVoice = new ImageIcon(this.getClass().getResource("/mic-icon-16.png")).getImage();
-		Image imgFile = new ImageIcon(this.getClass().getResource("/Download-icon-16.png")).getImage();
+		Image imgConfig = new ImageIcon("img/19-gear-icon-16.png").getImage();
+		Image imgAvatar = new ImageIcon("img/avatar-default-icon.png").getImage();
+		Image imgSend = new ImageIcon("img/paper-plane-icon-16.png").getImage();
+		Image imgVoice = new ImageIcon("img/mic-icon-16.png").getImage();
+		Image imgFile = new ImageIcon("img/Download-icon-16.png").getImage();
 		//Image imgCam = new ImageIcon(this.getClass().getResource("/App-Facetime-icon-16.png")).getImage();
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -121,6 +118,7 @@ public class Gui {
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(new ImageIcon(imgFile));
 		horizontalBottomRightBox.add(btnFile);
+		frame.setVisible(true);
 	}
 	
 }
