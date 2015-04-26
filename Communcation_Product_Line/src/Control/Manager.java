@@ -1,4 +1,4 @@
-package control_temp;
+package Control;
 
 import java.awt.*;
 
