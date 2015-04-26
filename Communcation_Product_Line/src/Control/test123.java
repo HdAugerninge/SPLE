@@ -39,7 +39,6 @@ public class test123 {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ChatTab ct = new ChatTab("asd");
-		ct.setChat("");
 		frame.getContentPane().add(ct);
 	}
 
