@@ -139,7 +139,7 @@ public class Gui {
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
 
-//		infoBox("Herzlich Willkommen", variante);
+		infoBox("Herzlich Willkommen", variante);
 	}
 
 	// Helpermethods
