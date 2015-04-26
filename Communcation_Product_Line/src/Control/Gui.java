@@ -7,14 +7,19 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
 import javax.swing.Box;
 import javax.swing.JTextField;
-
 import javax.swing.JLabel;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
@@ -23,10 +28,25 @@ import javax.swing.JTextPane;
 public class Gui {
 
 	private JFrame frame;
-	private JTextField textSend;
+	private JTabbedPane tabbedPane;
+	private JTextPane textPaneChat, textPaneInput;
+	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
+			imgAdd;
+	private ChatTab currentChatTab;
+	private List<ChatTab> listChatTab;
+	private String variante;
 
 	public Gui() {
 		// Classcreator BErechtigung und Funktionailtät
+		imgConfig = new ImageIcon("./img/19-gear-icon-16.png");
+		imgAvatar = new ImageIcon("./img/avatar-default-icon.png");
+		imgSend = new ImageIcon("./img/paper-plane-icon-16.png");
+		imgVoice = new ImageIcon("./img/mic-icon-16.png");
+		imgFile = new ImageIcon("./img/Download-icon-16.png");
+		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
+		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
+		listChatTab = new ArrayList<ChatTab>();
+		variante = "Hier könnte Ihre Werbung stehen";
 	}
 
 	public void init() {
@@ -36,55 +56,59 @@ public class Gui {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		frame.setVisible(true);
-
-		ImageIcon imgConfig = new ImageIcon("./img/19-gear-icon-16.png");
-		ImageIcon imgAvatar = new ImageIcon("./img/avatar-default-icon.png");
-		ImageIcon imgSend = new ImageIcon("./img/paper-plane-icon-16.png");
-		ImageIcon imgVoice = new ImageIcon("./img/mic-icon-16.png");
-		ImageIcon imgFile = new ImageIcon("./img/Download-icon-16.png");
-		ImageIcon imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
-
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
 		// Gesamter Frame für EINEN TAB
 		Box horizontalBox = Box.createHorizontalBox();
-		tabbedPane.addTab("New tab", null, horizontalBox, null);
+		frame.getContentPane().add(horizontalBox);
+		horizontalBox.add(tabbedPane);
 
-		// Chatfenster
-		Box verticalLeftBox = Box.createVerticalBox();
-		horizontalBox.add(verticalLeftBox);
-		
-		// Chat
-		JScrollPane scrollPaneChat = new JScrollPane();
-		verticalLeftBox.add(scrollPaneChat);
-		JTextPane textPaneChat = new JTextPane();
-		scrollPaneChat.setViewportView(textPaneChat);
-		
-		// Balken dazwischen
-		Component verticalStrut = Box.createVerticalStrut(5);
-		verticalLeftBox.add(verticalStrut);
-		// Input
-		JScrollPane scrollPaneInput = new JScrollPane();
-		verticalLeftBox.add(scrollPaneInput);
-		JTextPane textPaneInput = new JTextPane();
-		scrollPaneInput.setViewportView(textPaneInput);
-		
 		// Buttons
 		Box verticalRightBox = Box.createVerticalBox();
 		horizontalBox.add(verticalRightBox);
 
+		Box horizontalTopRightBox = Box.createHorizontalBox();
+		verticalRightBox.add(horizontalTopRightBox);
+
+		JButton btnAdd = new JButton("");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String name = inputBox("Name eintragen bitte", "Neuer Chat");
+				EventQueue.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						currentChatTab = new ChatTab(name);
+						listChatTab.add(currentChatTab);
+						tabbedPane.setLayout(null);
+						tabbedPane.addTab(name, currentChatTab);
+						tabbedPane.invalidate();
+						tabbedPane.repaint();
+						tabbedPane.updateUI();
+						System.out.println(currentChatTab.getName());
+					}
+				});
+				
+				
+//				frame.setVisible(true);
+			}
+		});
+		btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
+		horizontalTopRightBox.add(btnAdd);
+		btnAdd.setIcon(imgAdd);
+
 		JButton btnConfig = new JButton("");
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnConfig.setAlignmentY(Component.TOP_ALIGNMENT);
-		verticalRightBox.add(btnConfig);
+		horizontalTopRightBox.add(btnConfig);
 		btnConfig.setIcon(imgConfig);
 
 		JLabel lblAvatar = new JLabel("");
@@ -114,6 +138,30 @@ public class Gui {
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
+
+//		infoBox("Herzlich Willkommen", variante);
 	}
 
+	// Helpermethods
+	private Integer getSelectedTab() {
+		return tabbedPane.getSelectedIndex();
+	}
+
+	private String getInputValueTab(int tabnummer) {
+		return tabbedPane.getComponent(tabnummer).getName();
+	}
+
+	private void setChatValue(String verlauf) {
+		textPaneChat.setText(verlauf);
+	}
+
+	private void setTabName(int tabnummer, String teilnehmer) {
+		tabbedPane.getComponentAt(tabnummer).setName(teilnehmer);
+	}
+	private void infoBox(String infoMessage, String titleBar){
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+	private String inputBox(String infoMessage, String titleBar){
+        return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
 }

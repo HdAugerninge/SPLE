@@ -1,9 +1,7 @@
 package Control;
 //package Gui;
-
 //import Gui;
 
-import java.awt.EventQueue;
 
 public class Main {
 
