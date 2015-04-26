@@ -9,18 +9,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub#
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					Gui window = new Gui();
-					window.frame.setVisible(true);
+					window.init();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
-
+			
 	}
 
 }
