@@ -1,4 +1,4 @@
-package Control;
+package gui;
 
 //import UltimateGUI;
 

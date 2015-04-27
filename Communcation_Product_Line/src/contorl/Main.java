@@ -1,4 +1,6 @@
-package Control;
+package contorl;
+
+import gui.Gui;
 //package Gui;
 //import Gui;
 
