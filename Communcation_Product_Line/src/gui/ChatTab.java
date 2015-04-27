@@ -24,9 +24,13 @@ public class ChatTab extends JPanel{
 	private JTextPane textPaneChat, textPaneInput;
 	
 	public ChatTab(String name) {
-//		super(true);
+		super(null);
 		System.out.println(name + " created");
 		this.name = name;
+		initialize();
+	}
+	
+	private void initialize(){
 		// TODO Auto-generated constructor stub
 		panel = new JPanel();
 		panel.setLayout(null);
@@ -48,8 +52,8 @@ public class ChatTab extends JPanel{
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 148, 430, 4);
 		panel.add(horizontalStrut);
-//		panel.setVisible(true);
-//		panel.update(getGraphics());
+		panel.setVisible(true);
+		panel.update(getGraphics());
 	}
 	
 	public String getChat (){

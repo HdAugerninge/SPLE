@@ -24,6 +24,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JPanel;
 
 public class Gui {
 
@@ -35,6 +36,7 @@ public class Gui {
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
 	private String variante;
+	private JTextField textField;
 
 	public Gui() {
 		// Classcreator BErechtigung und Funktionailtät
@@ -70,6 +72,10 @@ public class Gui {
 		Box horizontalBox = Box.createHorizontalBox();
 		frame.getContentPane().add(horizontalBox);
 		horizontalBox.add(tabbedPane);
+		
+		ChatTab defaulttab = new ChatTab("");
+		tabbedPane.addTab("New tab", null, defaulttab, null);
+		
 
 		// Buttons
 		Box verticalRightBox = Box.createVerticalBox();
@@ -89,7 +95,6 @@ public class Gui {
 						// TODO Auto-generated method stub
 						currentChatTab = new ChatTab(name);
 						listChatTab.add(currentChatTab);
-						tabbedPane.setLayout(null);
 						tabbedPane.addTab(name, currentChatTab);
 						tabbedPane.invalidate();
 						tabbedPane.repaint();
