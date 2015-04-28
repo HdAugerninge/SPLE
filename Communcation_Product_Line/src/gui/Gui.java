@@ -186,24 +186,18 @@ public class Gui {
 		JButton fireSelectedPeopleBtn = new JButton();
 		fireSelectedPeopleBtn.setBounds(0, 175, 200, 50);
 		fireSelectedPeopleBtn.setText("Chat starten");
-		fireSelectedPeopleBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				chatTabLabelHelper = "";
-				currentChatTab = new ChatTab(peopleList.getSelectedValuesList());
-				listChatTab.add(currentChatTab);
-				peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
-				tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
-				tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
-				tabbedPane.invalidate();
-				tabbedPane.repaint();
-				tabbedPane.updateUI();
-				peopleFrame.setVisible(false);
-				System.out.println(currentChatTab.getName());
-			}
-			
+		fireSelectedPeopleBtn.addActionListener((event) -> {
+			chatTabLabelHelper = "";
+			currentChatTab = new ChatTab(peopleList.getSelectedValuesList());
+			listChatTab.add(currentChatTab);
+			peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
+			tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
+			tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
+			tabbedPane.invalidate();
+			tabbedPane.repaint();
+			tabbedPane.updateUI();
+			peopleFrame.setVisible(false);
+			System.out.println(currentChatTab.getName());
 		});
 		peopleFrame.add(fireSelectedPeopleBtn);
 		peopleFrame.setVisible(true);
