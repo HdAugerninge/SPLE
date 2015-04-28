@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import model.mock.MockResources;
+
 public class test123 {
 
 	private JFrame frame;
@@ -38,7 +40,7 @@ public class test123 {
 		frame.getContentPane().setLayout(null);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ChatTab ct = new ChatTab("asd");
+		ChatTab ct = new ChatTab(MockResources.getMockedPersons());
 		ct.setLocation(0, 0);
 		frame.add(ct);
 		frame.setVisible(true);

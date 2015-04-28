@@ -7,11 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JSeparator;
+
+import model.Person;
 
 public class ChatTab extends JPanel{
 
@@ -19,12 +24,12 @@ public class ChatTab extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String name;
+	private List<Person> chatPartner;
+	String names = "";
 	private JTextPane textPaneChat, textPaneInput;
 	
-	public ChatTab(String name) {
-		System.out.println(name + " created");
-		this.name = name;
+	public ChatTab(List<Person> chatPartner) {
+		this.chatPartner = chatPartner;
 		initialize();
 	}
 	
@@ -71,6 +76,8 @@ public class ChatTab extends JPanel{
 	}
 	
 	public String getName(){
-		return name;
+		names = "";
+		chatPartner.forEach((person) -> {names += person.getName();});
+		return names;
 	}
 }

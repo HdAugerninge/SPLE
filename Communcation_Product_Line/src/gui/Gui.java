@@ -19,12 +19,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import model.Person;
+import model.mock.MockResources;
 
 public class Gui {
 
@@ -37,6 +45,8 @@ public class Gui {
 	private List<ChatTab> listChatTab;
 	private String variante;
 	private JTextField textField;
+	
+	private String chatTabLabelHelper = "";
 
 	public Gui() {
 		// Classcreator BErechtigung und Funktionailt�t
@@ -73,9 +83,6 @@ public class Gui {
 		frame.getContentPane().add(horizontalBox);
 		horizontalBox.add(tabbedPane);
 		
-		ChatTab defaulttab = new ChatTab("");
-		tabbedPane.addTab("New tab", null, defaulttab, null);
-		
 
 		// Buttons
 		Box verticalRightBox = Box.createVerticalBox();
@@ -87,20 +94,13 @@ public class Gui {
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String name = inputBox("Name eintragen bitte", "Neuer Chat");
 				EventQueue.invokeLater(new Runnable() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						currentChatTab = new ChatTab(name);
-						listChatTab.add(currentChatTab);
-						tabbedPane.addTab(name, currentChatTab);
-						tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
-						tabbedPane.invalidate();
-						tabbedPane.repaint();
-						tabbedPane.updateUI();
-						System.out.println(currentChatTab.getName());
+						showPeopleList();
+
 					}
 				});
 				
@@ -170,5 +170,45 @@ public class Gui {
 	private String inputBox(String infoMessage, String titleBar){
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+	private void showPeopleList() {
+		JFrame peopleFrame = new JFrame();
+		peopleFrame.setLayout(null);
+		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
+		JList<Person> peopleList = new JList<Person>();
+		peopleList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		peopleList.setLayoutOrientation(JList.VERTICAL_WRAP);
+		peopleList.setVisibleRowCount(-1);
+		DefaultListModel<Person> listModel = new DefaultListModel<Person>();
+		MockResources.getMockedPersons().forEach((person) -> listModel.addElement(person));
+		peopleList.setModel(listModel);
+		peopleList.setBounds(0, 0, 200, 150);
+		peopleFrame.getContentPane().add(peopleList);
+		JButton fireSelectedPeopleBtn = new JButton();
+		fireSelectedPeopleBtn.setBounds(0, 175, 200, 50);
+		fireSelectedPeopleBtn.setText("Chat starten");
+		fireSelectedPeopleBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				chatTabLabelHelper = "";
+				currentChatTab = new ChatTab(peopleList.getSelectedValuesList());
+				listChatTab.add(currentChatTab);
+				peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
+				tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
+				tabbedPane.invalidate();
+				tabbedPane.repaint();
+				tabbedPane.updateUI();
+				peopleFrame.setVisible(false);
+				System.out.println(currentChatTab.getName());
+			}
+			
+		});
+		peopleFrame.add(fireSelectedPeopleBtn);
+		peopleFrame.setVisible(true);
+		peopleList.setVisible(true);
+		
+	}
 }
 

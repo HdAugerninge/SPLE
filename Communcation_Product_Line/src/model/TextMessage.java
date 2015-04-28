@@ -6,8 +6,8 @@ public class TextMessage extends Message implements Serializable {
 
 	private static final long serialVersionUID = 8525619406594117531L;
 
-	public TextMessage(Object sender, Object receiver, String payload) {
-		super(sender, receiver);
+	public TextMessage(Person sender, Person[] receivers, String payload) {
+		super(sender, receivers);
 		this.payload = payload;
 	}
 
