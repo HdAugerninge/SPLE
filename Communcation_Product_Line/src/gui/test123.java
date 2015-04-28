@@ -16,7 +16,6 @@ public class test123 {
 			public void run() {
 				try {
 					test123 window = new test123();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -36,10 +35,13 @@ public class test123 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setLayout(null);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ChatTab ct = new ChatTab("asd");
-		frame.getContentPane().add(ct);
+		ct.setLocation(0, 0);
+		frame.add(ct);
+		frame.setVisible(true);
 	}
 
 }
