@@ -20,11 +20,9 @@ public class ChatTab extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private JPanel panel;
 	private JTextPane textPaneChat, textPaneInput;
 	
 	public ChatTab(String name) {
-		super(null);
 		System.out.println(name + " created");
 		this.name = name;
 		initialize();
@@ -32,28 +30,28 @@ public class ChatTab extends JPanel{
 	
 	private void initialize(){
 		// TODO Auto-generated constructor stub
-		panel = new JPanel();
-		panel.setLayout(null);
+		setLayout(null);
+		setBounds(0, 0, 449, 300);
 		
 		JScrollPane scrollPaneChat = new JScrollPane();
 		scrollPaneChat.setBounds(10, 11, 430, 126);
-		panel.add(scrollPaneChat);
+		add(scrollPaneChat);
 		
 		JTextPane textPaneChat = new JTextPane();
 		scrollPaneChat.setViewportView(textPaneChat);
 		
 		JScrollPane scrollPaneInput = new JScrollPane();
 		scrollPaneInput.setBounds(10, 163, 430, 126);
-		panel.add(scrollPaneInput);
+		add(scrollPaneInput);
 		
 		JTextPane textPaneInput = new JTextPane();
 		scrollPaneInput.setViewportView(textPaneInput);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 148, 430, 4);
-		panel.add(horizontalStrut);
-		panel.setVisible(true);
-		panel.update(getGraphics());
+		add(horizontalStrut);
+		validate();
+		setVisible(true);
 	}
 	
 	public String getChat (){

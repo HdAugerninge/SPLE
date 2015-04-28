@@ -1,4 +1,4 @@
-package contorl;
+package control;
 
 import gui.Gui;
 //package Gui;

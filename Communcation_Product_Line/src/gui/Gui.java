@@ -39,7 +39,7 @@ public class Gui {
 	private JTextField textField;
 
 	public Gui() {
-		// Classcreator BErechtigung und Funktionailtät
+		// Classcreator BErechtigung und Funktionailtï¿½t
 		imgConfig = new ImageIcon("./img/19-gear-icon-16.png");
 		imgAvatar = new ImageIcon("./img/avatar-default-icon.png");
 		imgSend = new ImageIcon("./img/paper-plane-icon-16.png");
@@ -48,7 +48,7 @@ public class Gui {
 		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
 		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
 		listChatTab = new ArrayList<ChatTab>();
-		variante = "Hier könnte Ihre Werbung stehen";
+		variante = "Hier kï¿½nnte Ihre Werbung stehen";
 	}
 
 	public void init() {
@@ -62,13 +62,13 @@ public class Gui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 615, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-		// Gesamter Frame für EINEN TAB
+		// Gesamter Frame fï¿½r EINEN TAB
 		Box horizontalBox = Box.createHorizontalBox();
 		frame.getContentPane().add(horizontalBox);
 		horizontalBox.add(tabbedPane);
@@ -96,6 +96,7 @@ public class Gui {
 						currentChatTab = new ChatTab(name);
 						listChatTab.add(currentChatTab);
 						tabbedPane.addTab(name, currentChatTab);
+						tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
 						tabbedPane.invalidate();
 						tabbedPane.repaint();
 						tabbedPane.updateUI();
