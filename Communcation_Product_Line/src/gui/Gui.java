@@ -179,7 +179,7 @@ public class Gui {
 		peopleList.setLayoutOrientation(JList.VERTICAL_WRAP);
 		peopleList.setVisibleRowCount(-1);
 		DefaultListModel<Person> listModel = new DefaultListModel<Person>();
-		MockResources.getMockedPersons().forEach((person) -> listModel.addElement(person));
+		MockResources.PERSONS.forEach((person) -> listModel.addElement(person));
 		peopleList.setModel(listModel);
 		peopleList.setBounds(0, 0, 200, 150);
 		peopleFrame.getContentPane().add(peopleList);

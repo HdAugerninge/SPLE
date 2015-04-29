@@ -40,7 +40,7 @@ public class test123 {
 		frame.getContentPane().setLayout(null);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ChatTab ct = new ChatTab(MockResources.getMockedPersons());
+		ChatTab ct = new ChatTab(MockResources.PERSONS);
 		ct.setLocation(0, 0);
 		frame.add(ct);
 		frame.setVisible(true);
