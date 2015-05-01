@@ -18,7 +18,8 @@ public class Main {
 		}
 		
 		Config.variant = variant;
-		System.out.println(Config.getInstance().getAllBindings());
+	//	System.out.println(new Variance().hasCamera());
+	//	System.out.println(Config.getInstance().getAllBindings());
 		
 		// TODO Auto-generated method stub#
 				try {

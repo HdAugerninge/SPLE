@@ -17,7 +17,7 @@ public class Variance {
 	
 	//variance binding:
 	public boolean hasMultiCast() {
-		return  Boolean.valueOf(config.getBinding("multicast").toString());
+		return  (config.getBinding("multicast").toString().equals("1"));
 	}
 
 	public IEncryption getEncryption() {
@@ -30,15 +30,15 @@ public class Variance {
 	}
 
 	public boolean hasCamera() {
-		return  Boolean.valueOf(config.getBinding("camera").toString());
+		return  (config.getBinding("camera").toString().equals("1") );
 	}
 	
 	public boolean hasAuthentification() {
-		return  Boolean.valueOf(config.getBinding("athentification").toString());
+		return  (config.getBinding("athentification").toString().equals("1"));
 	}
 
 	public boolean hasHistory() {
-		return  Boolean.valueOf(config.getBinding("history").toString());
+		return  (config.getBinding("history").toString().equals("1"));
 	}
 
 	
