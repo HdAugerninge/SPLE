@@ -50,9 +50,6 @@ public class ChatTab extends JPanel{
 		scrollPaneChat.setViewportView(textPaneChat);		
 		textPaneChat.setText("Beginnen Sie eine Konversation");
 		
-		JLabel lblVerlauf = new JLabel("Verlauf");
-		scrollPaneChat.setColumnHeaderView(lblVerlauf);
-		
 		JScrollPane scrollPaneInput = new JScrollPane();
 		scrollPaneInput.setBounds(10, 163, 430, 126);
 		add(scrollPaneInput);
