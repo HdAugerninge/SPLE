@@ -29,6 +29,8 @@ import javax.swing.ListSelectionModel;
 import Model.Person;
 import Model.Variance;
 import Model.mock.MockResources;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class Gui {
 
@@ -105,6 +107,11 @@ public class Gui {
 		btnAdd.setVisible(var.hasConversation());
 
 		JButton btnConfig = new JButton("");
+		btnConfig.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showConfig();
+			}
+		});
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnConfig);
 		btnConfig.setIcon(imgConfig);
@@ -116,6 +123,13 @@ public class Gui {
 		lblAvatar.setIcon(imgAvatar);
 
 		JToggleButton tglbtnCam = new JToggleButton("");
+		tglbtnCam.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+					showCamera();
+				}
+			});
 		tglbtnCam.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(tglbtnCam);
 		tglbtnCam.setIcon(imgCam);
@@ -125,18 +139,33 @@ public class Gui {
 		verticalRightBox.add(horizontalBottomRightBox);
 
 		JButton btnSend = new JButton("");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setChatValue(getInputValue());
+			}
+		});
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnSend.setIcon(imgSend);
 		horizontalBottomRightBox.add(btnSend);
 		btnSend.setVisible(var.hasSend());
 
 		JButton btnVoice = new JButton("");
+		btnVoice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setChatValue("Voice übermittelt");
+			}
+		});
 		btnVoice.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnVoice.setIcon(imgVoice);
 		horizontalBottomRightBox.add(btnVoice);
 		btnVoice.setVisible(var.hasVoice());
 
 		JButton btnFile = new JButton("");
+		btnFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setChatValue("File übermittelt");
+			}
+		});
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
@@ -147,6 +176,7 @@ public class Gui {
 
 	// Helpermethods
 	private Integer getSelectedTab() {
+		//System.out.println(tabbedPane.getSelectedIndex());
 		return tabbedPane.getSelectedIndex();
 	}
 
@@ -155,7 +185,13 @@ public class Gui {
 	}
 
 	private void setChatValue(String verlauf) {
+		System.out.println(getSelectedTab());
+		ChatTab temp = listChatTab.get(getSelectedTab());
+		System.out.println(temp.getName());
+		temp.setInput(verlauf);
+		
 		listChatTab.get(getSelectedTab()).setInput(verlauf);
+		System.out.println(temp.getInput());
 	}
 
 	private void infoBox(String infoMessage, String titleBar){
@@ -168,7 +204,7 @@ public class Gui {
 	
 	private void showPeopleList() {
 		JFrame peopleFrame = new JFrame();
-		peopleFrame.setLayout(null);
+		peopleFrame.getContentPane().setLayout(null);
 		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
 		JList<Person> peopleList = new JList<Person>();
 		peopleList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -195,9 +231,17 @@ public class Gui {
 			peopleFrame.setVisible(false);
 			System.out.println(currentChatTab.getName());
 		});
-		peopleFrame.add(fireSelectedPeopleBtn);
+		peopleFrame.getContentPane().add(fireSelectedPeopleBtn);
 		peopleFrame.setVisible(true);
 		peopleList.setVisible(true);
+		
+	}
+	
+	private void showConfig(){
+		
+	}
+	
+	private void showCamera(){
 		
 	}
 }
