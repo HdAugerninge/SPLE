@@ -18,8 +18,11 @@ public class ChatTab extends JPanel{
 	/**
 	 * 
 	 */
+	// Serialnumber for variation
 	private static final long serialVersionUID = 1L;
+	// List for Chat-Partners
 	private List<Person> chatPartner;
+	// String for Tabname
 	String names = "";
 	private JTextPane textPaneChat, textPaneInput;
 	
@@ -37,7 +40,7 @@ public class ChatTab extends JPanel{
 		scrollPaneChat.setBounds(10, 11, 430, 126);
 		add(scrollPaneChat);
 		
-		JTextPane textPaneChat = new JTextPane();
+		textPaneChat = new JTextPane();
 		textPaneChat.setEditable(false);
 		scrollPaneChat.setViewportView(textPaneChat);		
 		textPaneChat.setText("Beginnen Sie eine Konversation");
@@ -46,7 +49,7 @@ public class ChatTab extends JPanel{
 		scrollPaneInput.setBounds(10, 163, 430, 126);
 		add(scrollPaneInput);
 		
-		JTextPane textPaneInput = new JTextPane();
+		textPaneInput = new JTextPane();
 		scrollPaneInput.setViewportView(textPaneInput);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
