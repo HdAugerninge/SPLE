@@ -2,12 +2,14 @@ package gui;
 
 //import UltimateGUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -15,6 +17,7 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,16 +43,19 @@ public class Gui {
 	private String variante, avatarname;
 	private Variance var;
 	private String chatTabLabelHelper = "";
-
+	
+//TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
+	
 	public Gui() {
 		// Classcreator BErechtigung und Funktionailtï¿½t
-		imgConfig = new ImageIcon("./img/19-gear-icon-16.png");
-		imgAvatar = new ImageIcon("./img/avatar-default-icon.png");
-		imgSend = new ImageIcon("./img/paper-plane-icon-16.png");
-		imgVoice = new ImageIcon("./img/mic-icon-16.png");
-		imgFile = new ImageIcon("./img/Download-icon-16.png");
-		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
-		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
+		
+		imgConfig = new ImageIcon(getClass().getResource("19-gear-icon-16.png"));
+		imgAvatar = new ImageIcon(getClass().getResource("avatar-default-icon.png"));
+		imgSend = new ImageIcon(getClass().getResource("paper-plane-icon-16.png"));
+		imgVoice = new ImageIcon(getClass().getResource("mic-icon-16.png"));
+		imgFile = new ImageIcon(getClass().getResource("Download-icon-16.png"));
+		imgCam = new ImageIcon(getClass().getResource("App-Facetime-icon-16.png"));
+		imgAdd = new ImageIcon(getClass().getResource("Plus-icon-16.png"));
 		listChatTab = new ArrayList<ChatTab>();
 		variante = "Hier könnte Ihre Werbung stehen";
 		avatarname = "Testuser123";

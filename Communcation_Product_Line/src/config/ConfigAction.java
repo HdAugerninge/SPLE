@@ -25,7 +25,7 @@ class ConfigAction {
 
 	public ConfigAction(String variant) {
 		// TODO Auto-generated constructor stub
-		this.path = "src/config/"+variant+".properties";
+		this.path = "config/"+variant+".properties";
 	}
 
 
@@ -41,8 +41,8 @@ class ConfigAction {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		try {
 
-			input = new FileInputStream(path);
-
+		//	input = new FileInputStream(path);
+			input = getClass().getClassLoader().getResourceAsStream(this.path); //damits auch als .jar noch geht
 			// load a properties file
 			prop.load(input);
 			prop.stringPropertyNames();
