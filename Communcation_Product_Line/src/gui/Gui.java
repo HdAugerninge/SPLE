@@ -58,7 +58,7 @@ public class Gui {
 		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
 		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
 		listChatTab = new ArrayList<ChatTab>();
-		variante = "Hier kï¿½nnte Ihre Werbung stehen";
+		variante = "Hier könnte Ihre Werbung stehen";
 	}
 
 	public void init() {
