@@ -6,8 +6,6 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-
-
 import java.util.Calendar;
 import java.util.List;
 
