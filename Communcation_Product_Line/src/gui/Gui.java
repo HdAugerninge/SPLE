@@ -10,7 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.Box;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.Component;
@@ -29,8 +28,6 @@ import javax.swing.ListSelectionModel;
 import Model.Person;
 import Model.Variance;
 import Model.mock.MockResources;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 public class Gui {
 
@@ -42,7 +39,6 @@ public class Gui {
 	private List<ChatTab> listChatTab;
 	private String variante, avatarname;
 	private Variance var;
-	
 	private String chatTabLabelHelper = "";
 
 	public Gui() {

@@ -19,7 +19,7 @@ public class Main {
 		
 		Config.variant = variant;
 		System.out.println(Config.getInstance().getAllBindings());
-		/*
+		
 		// TODO Auto-generated method stub#
 				try {
 					Gui window = new Gui();
@@ -28,7 +28,7 @@ public class Main {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		*/
+		
 	}
 
 }
