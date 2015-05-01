@@ -47,7 +47,6 @@ public class Gui {
 //TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
 	
 	public Gui() {
-		// Classcreator BErechtigung und Funktionailtï¿½t
 		
 		imgConfig = new ImageIcon(getClass().getResource("19-gear-icon-16.png"));
 		imgAvatar = new ImageIcon(getClass().getResource("avatar-default-icon.png"));
@@ -98,7 +97,6 @@ public class Gui {
 				EventQueue.invokeLater(new Runnable() {					
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						showPeopleList();
 						//TODO hide all Buttons solange keine Konversation geöffnet ist
 					}
@@ -130,7 +128,6 @@ public class Gui {
 		tglbtnCam.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 					showCamera();
 				}
 			});
@@ -248,10 +245,13 @@ public class Gui {
 	}
 	
 	private void showConfig(){
-		
+		JFrame configFrame = new JFrame();
+		configFrame.getContentPane().setLayout(null);
+		configFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
+		//TODO Cofigframe ... Avatarbild ändern Avatarname ändern Plus VErsionsname anzeigen lassen
 	}
 	
 	private void showCamera(){
-		
+		//TODO wei bei beiden Personen bild in Camera aufpopt
 	}
 }
