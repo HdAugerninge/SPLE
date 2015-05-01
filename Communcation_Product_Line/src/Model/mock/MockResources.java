@@ -1,9 +1,9 @@
-package model.mock;
+package Model.mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Person;
+import Model.Person;
 
 public class MockResources {
 

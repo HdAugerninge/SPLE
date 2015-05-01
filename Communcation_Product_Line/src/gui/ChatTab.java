@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JSeparator;
 
-import model.Person;
+import Model.Person;
 
 public class ChatTab extends JPanel{
 

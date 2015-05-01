@@ -1,4 +1,4 @@
-package model.transfer;
+package Model.transfer;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Message;
+import Model.Message;
 
 public class MessageSerializer {
 	

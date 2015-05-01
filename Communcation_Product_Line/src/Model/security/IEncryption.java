@@ -1,4 +1,4 @@
-package model.security;
+package Model.security;
 
 /**
  * Created by test on 25.04.2015.

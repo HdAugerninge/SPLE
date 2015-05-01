@@ -31,8 +31,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import model.Person;
-import model.mock.MockResources;
+import Model.Person;
+import Model.mock.MockResources;
 
 public class Gui {
 

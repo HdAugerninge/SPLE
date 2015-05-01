@@ -1,4 +1,4 @@
-package model.security;
+package Model.security;
 
 /**
  * TODO: automatisch checken, ob benutzer eingeloggt

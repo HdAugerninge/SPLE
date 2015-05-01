@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import model.mock.MockResources;
+import Model.mock.MockResources;
 
 public class test123 {
 
