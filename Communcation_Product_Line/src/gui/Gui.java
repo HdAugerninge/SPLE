@@ -10,7 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.Box;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.Component;
@@ -24,23 +23,16 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import Model.Person;
+import Model.Variance;
 import Model.mock.MockResources;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 public class Gui {
 
 	private JFrame frame;
 	private JTabbedPane tabbedPane;
-	private JTextPane textPaneChat, textPaneInput;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
 			imgAdd;
 	private ChatTab currentChatTab;
@@ -61,13 +53,9 @@ public class Gui {
 		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
 		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
 		listChatTab = new ArrayList<ChatTab>();
-<<<<<<< HEAD
-		variante = "Hier kï¿½nnte Ihre Werbung stehen";
-=======
 		variante = "Hier könnte Ihre Werbung stehen";
 		avatarname = "Testuser123";
 		var = new Variance();
->>>>>>> branch 'master' of https://github.com/HdAugerninge/SPLE.git
 	}
 
 	public void init() {
@@ -190,22 +178,17 @@ public class Gui {
 		return tabbedPane.getSelectedIndex();
 	}
 
-	private String getInputValueTab(int tabnummer) {
-		return tabbedPane.getComponent(tabnummer).getName();
+	private String getInputValue() {
+		return listChatTab.get(getSelectedTab()).getInput();
 	}
 
 	private void setChatValue(String verlauf) {
-<<<<<<< HEAD
-		textPaneChat.setText(verlauf);
-=======
 //		System.out.println(getSelectedTab());
 //		ChatTab temp = listChatTab.get(getSelectedTab());
 //		System.out.println(temp.getName());
 //		temp.setChat(avatarname + "] " + verlauf);
 //		System.out.println(temp.getInput());
 		listChatTab.get(getSelectedTab()).setChat(avatarname + "] " + verlauf);
-		
->>>>>>> branch 'master' of https://github.com/HdAugerninge/SPLE.git
 	}
 
 	private void setTabName(int tabnummer, String teilnehmer) {
