@@ -186,13 +186,13 @@ public class Gui {
 	}
 
 	private void setChatValue(String verlauf) {
-		System.out.println(getSelectedTab());
-		ChatTab temp = listChatTab.get(getSelectedTab());
-		System.out.println(temp.getName());
-		temp.setChat(avatarname + "] " + verlauf);
+//		System.out.println(getSelectedTab());
+//		ChatTab temp = listChatTab.get(getSelectedTab());
+//		System.out.println(temp.getName());
+//		temp.setChat(avatarname + "] " + verlauf);
+//		System.out.println(temp.getInput());
+		listChatTab.get(getSelectedTab()).setChat(avatarname + "] " + verlauf);
 		
-		listChatTab.get(getSelectedTab()).setInput(verlauf);
-		System.out.println(temp.getInput());
 	}
 
 	private void infoBox(String infoMessage, String titleBar){
