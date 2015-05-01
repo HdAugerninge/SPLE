@@ -94,6 +94,7 @@ public class Gui {
 					public void run() {
 						// TODO Auto-generated method stub
 						showPeopleList();
+						//TODO hide all Buttons solange keine Konversation geöffnet ist
 					}
 				});
 			}
