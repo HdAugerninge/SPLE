@@ -9,7 +9,6 @@ import javax.swing.JTextPane;
 import java.util.Calendar;
 import java.util.List;
 
-
 import Model.Person;
 import java.text.SimpleDateFormat;
 
@@ -25,13 +24,21 @@ public class ChatTab extends JPanel{
 	private List<Person> chatPartner;
 	// String for Tabname
 	String names = "";
+	// Create TextPanes for Chat Tab
 	private JTextPane textPaneChat, textPaneInput;
 	
+	// Creates a new ChatTab
 	public ChatTab(List<Person> chatPartner) {
 		this.chatPartner = chatPartner;
 		initialize();
 	}
 	
+	/**
+	 * initialize()
+	 * Initializes the complete tab, including
+	 * Both Panes for sending and receive,
+	 * scrollPanes and strut.
+	 */
 	private void initialize(){
 		// TODO Auto-generated constructor stub
 		setLayout(null);
@@ -72,11 +79,12 @@ public class ChatTab extends JPanel{
 	
 	// Sets the Input of the textPaneChat Object
 	public void setChat (String text){
+		// Creating Timestamp
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		System.out.println(sdf.format(cal.getTime()));
-		textPaneChat.setText(getChat () + "\n[" + sdf.format(cal.getTime()) +"]" + text);
+		// Setting actual Textoutput
+		textPaneChat.setText(getChat () + "\n[" + sdf.format(cal.getTime()) + " " + text);
 	}
 	
 	// Sets the Input of the TextPane Input Object
