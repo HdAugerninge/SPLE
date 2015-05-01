@@ -40,7 +40,7 @@ public class Gui {
 			imgAdd;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
-	private String variante;
+	private String variante, avatarname;
 	private Variance var;
 	
 	private String chatTabLabelHelper = "";
@@ -56,6 +56,7 @@ public class Gui {
 		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
 		listChatTab = new ArrayList<ChatTab>();
 		variante = "Hier könnte Ihre Werbung stehen";
+		avatarname = "Testuser123";
 		var = new Variance();
 	}
 
@@ -188,7 +189,7 @@ public class Gui {
 		System.out.println(getSelectedTab());
 		ChatTab temp = listChatTab.get(getSelectedTab());
 		System.out.println(temp.getName());
-		temp.setChat(verlauf);
+		temp.setChat(avatarname + "] " + verlauf);
 		
 		listChatTab.get(getSelectedTab()).setInput(verlauf);
 		System.out.println(temp.getInput());
