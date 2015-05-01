@@ -188,7 +188,7 @@ public class Gui {
 		System.out.println(getSelectedTab());
 		ChatTab temp = listChatTab.get(getSelectedTab());
 		System.out.println(temp.getName());
-		temp.setInput(verlauf);
+		temp.setChat(verlauf);
 		
 		listChatTab.get(getSelectedTab()).setInput(verlauf);
 		System.out.println(temp.getInput());
