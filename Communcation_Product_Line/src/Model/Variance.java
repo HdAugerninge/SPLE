@@ -64,7 +64,7 @@ public class Variance {
 
 	public boolean hasConversation() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
