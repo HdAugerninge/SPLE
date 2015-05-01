@@ -94,6 +94,7 @@ public class Gui {
 					public void run() {
 						// TODO Auto-generated method stub
 						showPeopleList();
+						//TODO hide all Buttons solange keine Konversation geöffnet ist
 					}
 				});
 			}
@@ -204,7 +205,13 @@ public class Gui {
 		peopleFrame.getContentPane().setLayout(null);
 		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
 		JList<Person> peopleList = new JList<Person>();
-		peopleList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		if(var.hasMultiCast()){
+			//Decision if conversation can be started with many
+			peopleList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		}else{
+			//or only one person
+			peopleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		}
 		peopleList.setLayoutOrientation(JList.VERTICAL_WRAP);
 		peopleList.setVisibleRowCount(-1);
 		DefaultListModel<Person> listModel = new DefaultListModel<Person>();
