@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JSeparator;
 
 import Model.Person;
+import javax.swing.JLabel;
 
 public class ChatTab extends JPanel{
 
@@ -43,7 +44,12 @@ public class ChatTab extends JPanel{
 		add(scrollPaneChat);
 		
 		JTextPane textPaneChat = new JTextPane();
-		scrollPaneChat.setViewportView(textPaneChat);
+		textPaneChat.setEditable(false);
+		scrollPaneChat.setViewportView(textPaneChat);		
+		textPaneChat.setText("Beginnen Sie eine Konversation");
+		
+		JLabel lblVerlauf = new JLabel("Verlauf");
+		scrollPaneChat.setColumnHeaderView(lblVerlauf);
 		
 		JScrollPane scrollPaneInput = new JScrollPane();
 		scrollPaneInput.setBounds(10, 163, 430, 126);
