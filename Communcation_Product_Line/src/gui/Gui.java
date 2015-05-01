@@ -146,24 +146,26 @@ public class Gui {
 	}
 
 	// Helpermethods
-//	private Integer getSelectedTab() {
-//		return tabbedPane.getSelectedIndex();
-//	}
-//
-//	private String getInputValueTab(int tabnummer) {
-//		return tabbedPane.getComponent(tabnummer).getName();
-//	}
-//
-//	private void setChatValue(String verlauf) {
-//		textPaneChat.setText(verlauf);
-//	}
+	private Integer getSelectedTab() {
+		return tabbedPane.getSelectedIndex();
+	}
+
+	private String getInputValue() {
+		return listChatTab.get(getSelectedTab()).getInput();
+	}
+
+	private void setChatValue(String verlauf) {
+		listChatTab.get(getSelectedTab()).setInput(verlauf);
+	}
 
 	private void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+	
 	private String inputBox(String infoMessage, String titleBar){
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+	
 	private void showPeopleList() {
 		JFrame peopleFrame = new JFrame();
 		peopleFrame.setLayout(null);
