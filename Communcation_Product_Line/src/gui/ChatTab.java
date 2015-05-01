@@ -84,11 +84,17 @@ public class ChatTab extends JPanel{
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		// Setting actual Textoutput
 		textPaneChat.setText(getChat () + "\n[" + sdf.format(cal.getTime()) + " " + text);
+		clearInput();
 	}
 	
-	// Sets the Input of the TextPane Input Object
+	// Sets the Input of the TextPaneInput Object
 	public void setInput (String text){
 		textPaneInput.setText(text);
+	}
+	
+	// Clears the content of the TextPaneInput Object
+	private void clearInput(){
+		textPaneInput.setText("");
 	}
 	
 	// Returns the Name of the Conversation
