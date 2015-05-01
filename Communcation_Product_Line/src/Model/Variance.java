@@ -11,8 +11,8 @@ public class Variance {
         return true;
     }
     public IEncryption getEncryption(){
-        //Default Verhalten für Encryption
-        //TODO: abhängig von config zurück geben
+        //Default Verhalten f�r Encryption
+        //TODO: abhängig von config zur�ck geben
         return new DefaultEncryption();
     }
 
