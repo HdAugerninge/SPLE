@@ -12,6 +12,7 @@ public class Manager {
 
     public void singleMessageClicked(Event e){
         // mach den Kram, der geschehen soll, wenn eine einzelnahricht ausgewählt wurde
+    	
     }
 
     public void editAvaterClicked(Event e){

@@ -1,5 +1,6 @@
 package Model;
 
+import config.Config;
 import Model.security.*;
 
 /**
@@ -8,20 +9,43 @@ import Model.security.*;
  */
 public class Variance {
 
+	private Config config;
+	
+	public Variance(){
+		config = Config.getInstance();
+	}
+	
+	//variance binding:
 	public boolean hasMultiCast() {
-		return true;
+		return (boolean)config.getBinding("multicast");
 	}
 
 	public IEncryption getEncryption() {
-		// Default Verhalten für Encryption
-		// TODO: abhÃ¤ngig von config zurück geben
+		String encryption = (String) config.getBinding("encryption");
+		switch(encryption){
+			case "default":	  return new DefaultEncryption();
+			case "Caesarian": return new CaesarianEncryption();
+		}
 		return new DefaultEncryption();
 	}
 
 	public boolean hasCamera() {
-		return true;
+		return (boolean)config.getBinding("camera");
+	}
+	
+	public boolean hasAuthentification() {
+		return (boolean)config.getBinding("authentification");
 	}
 
+	public boolean hasHistory() {
+		return (boolean)config.getBinding("history");
+	}
+
+	
+	
+	
+	
+	//optionale (und nicht genutzte) variance points
 	public boolean hasSend() {
 		return true;
 	}
@@ -29,12 +53,12 @@ public class Variance {
 	public boolean hasVoice() {
 		return true;
 	}
-
-	public boolean hasConfig() {
+	
+	public boolean hasFile() {
 		return true;
 	}
 
-	public boolean hasFile() {
+	public boolean hasConfig() {
 		return true;
 	}
 

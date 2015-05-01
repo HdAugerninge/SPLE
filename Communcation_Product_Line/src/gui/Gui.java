@@ -24,22 +24,27 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Model.Person;
-import Model.Variance;
 import Model.mock.MockResources;
 
 public class Gui {
 
 	private JFrame frame;
 	private JTabbedPane tabbedPane;
+	private JTextPane textPaneChat, textPaneInput;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
 			imgAdd;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
 	private String variante;
-	private Variance var;
+	private JTextField textField;
 	
 	private String chatTabLabelHelper = "";
 
@@ -53,8 +58,7 @@ public class Gui {
 		imgCam = new ImageIcon("./img/App-Facetime-icon-16.png");
 		imgAdd = new ImageIcon("./img/Plus-icon-16.png");
 		listChatTab = new ArrayList<ChatTab>();
-		variante = "Hier könnte Ihre Werbung stehen";
-		var = new Variance();
+		variante = "Hier kï¿½nnte Ihre Werbung stehen";
 	}
 
 	public void init() {
@@ -90,25 +94,28 @@ public class Gui {
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {					
+				EventQueue.invokeLater(new Runnable() {
+					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						showPeopleList();
+
 					}
 				});
+				
+				
+//				frame.setVisible(true);
 			}
 		});
 		btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnAdd);
 		btnAdd.setIcon(imgAdd);
-		btnAdd.setVisible(var.hasConversation());
 
 		JButton btnConfig = new JButton("");
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnConfig);
 		btnConfig.setIcon(imgConfig);
-		btnConfig.setVisible(var.hasConfig());
 
 		JLabel lblAvatar = new JLabel("");
 		lblAvatar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -119,7 +126,6 @@ public class Gui {
 		tglbtnCam.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(tglbtnCam);
 		tglbtnCam.setIcon(imgCam);
-		tglbtnCam.setVisible(var.hasCamera());
 
 		Box horizontalBottomRightBox = Box.createHorizontalBox();
 		verticalRightBox.add(horizontalBottomRightBox);
@@ -128,19 +134,16 @@ public class Gui {
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnSend.setIcon(imgSend);
 		horizontalBottomRightBox.add(btnSend);
-		btnSend.setVisible(var.hasSend());
 
 		JButton btnVoice = new JButton("");
 		btnVoice.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnVoice.setIcon(imgVoice);
 		horizontalBottomRightBox.add(btnVoice);
-		btnVoice.setVisible(var.hasVoice());
 
 		JButton btnFile = new JButton("");
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
-		btnFile.setVisible(var.hasFile());
 
 		infoBox("Herzlich Willkommen", variante);
 	}
@@ -150,22 +153,23 @@ public class Gui {
 		return tabbedPane.getSelectedIndex();
 	}
 
-	private String getInputValue() {
-		return listChatTab.get(getSelectedTab()).getInput();
+	private String getInputValueTab(int tabnummer) {
+		return tabbedPane.getComponent(tabnummer).getName();
 	}
 
 	private void setChatValue(String verlauf) {
-		listChatTab.get(getSelectedTab()).setInput(verlauf);
+		textPaneChat.setText(verlauf);
 	}
 
+	private void setTabName(int tabnummer, String teilnehmer) {
+		tabbedPane.getComponentAt(tabnummer).setName(teilnehmer);
+	}
 	private void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-	
 	private String inputBox(String infoMessage, String titleBar){
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-	
 	private void showPeopleList() {
 		JFrame peopleFrame = new JFrame();
 		peopleFrame.setLayout(null);

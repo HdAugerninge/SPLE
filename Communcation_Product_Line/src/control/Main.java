@@ -1,5 +1,7 @@
 package control;
 
+import config.Config;
+import Model.Variance;
 import gui.Gui;
 //package Gui;
 //import Gui;
@@ -7,7 +9,17 @@ import gui.Gui;
 
 public class Main {
 
+
 	public static void main(String[] args) {
+		
+		String variant = "ultimate";
+		if(args.length >0 && args[0] != null){
+			variant = args[0];
+		}
+		
+		Config.variant = variant;
+		System.out.println(Config.getInstance().getAllBindings());
+		/*
 		// TODO Auto-generated method stub#
 				try {
 					Gui window = new Gui();
@@ -16,7 +28,7 @@ public class Main {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			
+		*/
 	}
 
 }
