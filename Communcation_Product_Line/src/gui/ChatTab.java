@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 
 
 public class ChatTab extends JPanel{
-
 	/**
 	 * 
 	 */
