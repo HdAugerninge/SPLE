@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.Box;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import java.awt.Component;
@@ -23,11 +24,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
+
 import Model.Person;
 import Model.Variance;
 import Model.mock.MockResources;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class Gui {
 
@@ -37,7 +40,6 @@ public class Gui {
 			imgAdd;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
-
 	private String variante, avatarname;
 	private Variance var;
 	
@@ -91,23 +93,19 @@ public class Gui {
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {
-					
+				EventQueue.invokeLater(new Runnable() {					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						showPeopleList();
-
 					}
 				});
-				
-				
-//				frame.setVisible(true);
 			}
 		});
 		btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnAdd);
 		btnAdd.setIcon(imgAdd);
+		btnAdd.setVisible(var.hasConversation());
 
 		JButton btnConfig = new JButton("");
 		btnConfig.addActionListener(new ActionListener() {
@@ -118,6 +116,7 @@ public class Gui {
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnConfig);
 		btnConfig.setIcon(imgConfig);
+		btnConfig.setVisible(var.hasConfig());
 
 		JLabel lblAvatar = new JLabel("");
 		lblAvatar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -135,6 +134,7 @@ public class Gui {
 		tglbtnCam.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(tglbtnCam);
 		tglbtnCam.setIcon(imgCam);
+		tglbtnCam.setVisible(var.hasCamera());
 
 		Box horizontalBottomRightBox = Box.createHorizontalBox();
 		verticalRightBox.add(horizontalBottomRightBox);
@@ -148,6 +148,7 @@ public class Gui {
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnSend.setIcon(imgSend);
 		horizontalBottomRightBox.add(btnSend);
+		btnSend.setVisible(var.hasSend());
 
 		JButton btnVoice = new JButton("");
 		btnVoice.addActionListener(new ActionListener() {
@@ -158,6 +159,7 @@ public class Gui {
 		btnVoice.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnVoice.setIcon(imgVoice);
 		horizontalBottomRightBox.add(btnVoice);
+		btnVoice.setVisible(var.hasVoice());
 
 		JButton btnFile = new JButton("");
 		btnFile.addActionListener(new ActionListener() {
@@ -168,6 +170,7 @@ public class Gui {
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
+		btnFile.setVisible(var.hasFile());
 
 		infoBox("Herzlich Willkommen", variante);
 	}
@@ -189,17 +192,17 @@ public class Gui {
 //		temp.setChat(avatarname + "] " + verlauf);
 //		System.out.println(temp.getInput());
 		listChatTab.get(getSelectedTab()).setChat(avatarname + "] " + verlauf);
+		
 	}
 
-	private void setTabName(int tabnummer, String teilnehmer) {
-		tabbedPane.getComponentAt(tabnummer).setName(teilnehmer);
-	}
 	private void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+	
 	private String inputBox(String infoMessage, String titleBar){
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+	
 	private void showPeopleList() {
 		JFrame peopleFrame = new JFrame();
 		peopleFrame.getContentPane().setLayout(null);
