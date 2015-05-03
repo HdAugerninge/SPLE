@@ -67,12 +67,12 @@ public class ChatTab extends JPanel{
 	}
 	
 	// Returns the Content of the textPaneChat Object
-	public String getChat (){
+	public String getChat(){
 		return textPaneChat.getText().toString();
 	}
 	
 	// Returns the Content of the textPaneInput Object
-	public String getInput (){
+	public String getInput(){
 		return textPaneInput.getText().toString();
 	}
 	
