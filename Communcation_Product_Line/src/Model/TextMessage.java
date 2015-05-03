@@ -20,6 +20,7 @@ public class TextMessage extends Message implements Serializable {
 	
 	@Override
 	public String toString() {
+		receiversString = "";
 		this.receivers.forEach((receiver) -> receiversString += receiver.getName() + " ");
 		return "Sender: " + sender.getName() + ", Receiver: " + receiversString + " Message: " + getMessagePaylaod();
 	}
