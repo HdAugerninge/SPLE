@@ -39,11 +39,7 @@ public class Variance {
 
 	public boolean hasHistory() {
 		return  (config.getBinding("history").toString().equals("1"));
-	}
-
-	
-	
-	
+	}	
 	
 	//optionale (und nicht genutzte) variance points
 	public boolean hasSend() {
