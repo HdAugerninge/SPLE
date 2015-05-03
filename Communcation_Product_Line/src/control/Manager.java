@@ -37,6 +37,7 @@ public class Manager implements MessageStorageHasChangedCallback {
 	@Override
 	public void onMessageStorageHasChanged(List<TextMessage> messageStorage) {
 		// Do Something with synchronized messages
+		System.out.println("onMessageStorageHasChanged called!");
 	}
 
 }
