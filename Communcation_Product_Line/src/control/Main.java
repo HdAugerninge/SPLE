@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import javax.swing.UIManager;
 
 import config.Config;
-import Model.Variance;
 import gui.Gui;
 //package Gui;
 //import Gui;
@@ -58,6 +57,7 @@ public class Main {
 						@Override
 						public void windowClosing(WindowEvent e) {		
 							try {
+								//Variationspunkt einbringen
 								Files.deleteIfExists(Paths.get(System.getProperty("java.io.tmpdir") + File.separator + "messagepipe.bin"));
 							} catch (IOException e1) {
 								e1.printStackTrace();

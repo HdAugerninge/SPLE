@@ -2,14 +2,13 @@ package gui;
 
 //import UltimateGUI;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Image;
+
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -17,12 +16,6 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 

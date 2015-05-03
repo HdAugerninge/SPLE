@@ -6,15 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import Model.Message;
 
 public class MessageSerializer {
 	
-	@SuppressWarnings("unchecked")
 	public <T extends Message> void pipeMessages(List<? extends Message> messages) {
 		try {
 			new File(System.getProperty("java.io.tmpdir") + File.separator + "messagepipe.bin").createNewFile();

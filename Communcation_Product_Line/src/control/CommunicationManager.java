@@ -6,13 +6,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Message;
-import Model.Person;
 import Model.TextMessage;
 import Model.transfer.MessageSerializer;
 
 public class CommunicationManager implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private transient MessageSerializer messageSerializer;
 	private List<TextMessage> messageStorage;
 	private transient Thread workingThread;
@@ -56,6 +58,7 @@ public class CommunicationManager implements Serializable {
 
 	private class CommunicationManagerWorkingThread implements Runnable {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void run() {
 			while(true) {

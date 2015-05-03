@@ -15,6 +15,7 @@ import Model.TextMessage;
 public class Manager implements MessageStorageHasChangedCallback {
 
 	private CommunicationManager communicationManager;
+	@SuppressWarnings("unused")
 	private ArrayList<TextMessage> messageStorage;
 	public Manager() {
 		this.communicationManager = CommunicationManager.getInstance();
