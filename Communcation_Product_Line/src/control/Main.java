@@ -1,5 +1,7 @@
 package control;
 
+import javax.swing.UIManager;
+
 import config.Config;
 import Model.Variance;
 import gui.Gui;
@@ -23,6 +25,8 @@ public class Main {
 		
 		// TODO Auto-generated method stub#
 				try {
+					UIManager.setLookAndFeel(
+				            UIManager.getSystemLookAndFeelClassName());
 					Gui window = new Gui();
 					window.init();
 				
