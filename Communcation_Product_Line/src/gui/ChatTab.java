@@ -23,12 +23,14 @@ public class ChatTab extends JPanel{
 	private List<Person> chatPartner;
 	// String for Tabname
 	String names = "";
+	String me_name = "";
 	// Create TextPanes for Chat Tab
 	private JTextPane textPaneChat, textPaneInput;
 	
 	// Creates a new ChatTab
-	public ChatTab(List<Person> chatPartner) {
+	public ChatTab(List<Person> chatPartner,Person me) {
 		this.chatPartner = chatPartner;
+		me_name=me.getName();
 		initialize();
 	}
 	
@@ -41,12 +43,10 @@ public class ChatTab extends JPanel{
 	private void initialize(){
 		// TODO Auto-generated constructor stub
 		setLayout(null);
-		setBounds(0, 0, 449, 300);
-		
+		setBounds(0, 0, 449, 300);		
 		JScrollPane scrollPaneChat = new JScrollPane();
 		scrollPaneChat.setBounds(10, 11, 430, 126);
-		add(scrollPaneChat);
-		
+		add(scrollPaneChat);		
 		textPaneChat = new JTextPane();
 		textPaneChat.setEditable(false);
 		scrollPaneChat.setViewportView(textPaneChat);		
@@ -100,9 +100,10 @@ public class ChatTab extends JPanel{
 	// Returns the Name of the Conversation
 	// Listed all Persons in Group/Chat
 	public String getName(){
-		names = "";
+		names = me_name + "-->";
 		chatPartner.forEach((person) -> {names += person.getName() + ", ";});
 		return names.substring(0, names.length() - 2);
+		
 	}
 	
 	public List<Person> getChatPartners() {

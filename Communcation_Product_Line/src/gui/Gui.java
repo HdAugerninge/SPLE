@@ -36,8 +36,10 @@ public class Gui {
 
 	public JFrame frame;
 	private JTabbedPane tabbedPane;
+	private JLabel lblVersion;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
 			imgAdd;
+	private Person me;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
 	private String variante, avatarname;
@@ -61,6 +63,7 @@ public class Gui {
 		avatarname = "Testuser123";
 		var = new Variance();
 		manager = new Manager();
+		me = new Person(avatarname);
 	}
 
 	public void init() {
@@ -113,7 +116,13 @@ public class Gui {
 		JButton btnConfig = new JButton("");
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				showConfig();
+				EventQueue.invokeLater(new Runnable() {					
+					@Override
+					public void run() {
+						showConfig();
+						//TODO hide all Buttons solange keine Konversation geöffnet ist
+					}
+				});
 			}
 		});
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -145,7 +154,7 @@ public class Gui {
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setChatValue(getInputValue());
-				TextMessage messageToSend = new TextMessage(new Person("Testuser123"), currentChatTab.getChatPartners(), getInputValue());
+				TextMessage messageToSend = new TextMessage(me, currentChatTab.getChatPartners(), getInputValue());
 				manager.sendMessage(messageToSend);
 			}
 		});
@@ -176,7 +185,7 @@ public class Gui {
 		horizontalBottomRightBox.add(btnFile);
 		btnFile.setVisible(var.hasFile());
 
-		infoBox("Herzlich Willkommen", variante);
+//		infoBox("Herzlich Willkommen", variante);
 	}
 
 	// Helpermethods
@@ -231,16 +240,17 @@ public class Gui {
 		fireSelectedPeopleBtn.setText("Chat starten");
 		fireSelectedPeopleBtn.addActionListener((event) -> {
 			chatTabLabelHelper = "";
-			currentChatTab = new ChatTab(peopleList.getSelectedValuesList());
+			currentChatTab = new ChatTab(peopleList.getSelectedValuesList(),me);
 			listChatTab.add(currentChatTab);
 			peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
-			tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
+//			tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
+			tabbedPane.addTab(currentChatTab.getName(), currentChatTab);
 			tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
 			tabbedPane.invalidate();
 			tabbedPane.repaint();
 			tabbedPane.updateUI();
 			peopleFrame.setVisible(false);
-			System.out.println(currentChatTab.getName());
+			System.out.println("Chat opened with " + currentChatTab.getName());
 		});
 		peopleFrame.getContentPane().add(fireSelectedPeopleBtn);
 		peopleFrame.setVisible(true);
@@ -252,7 +262,22 @@ public class Gui {
 		JFrame configFrame = new JFrame();
 		configFrame.getContentPane().setLayout(null);
 		configFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
-		//TODO Cofigframe ... Avatarbild ändern Avatarname ändern Plus VErsionsname anzeigen lassen
+		JLabel lbl = new JLabel("Configuration");
+		lbl.setBounds(0,0,100,10);
+		configFrame.getContentPane().add(lbl, BorderLayout.NORTH);
+		JButton btnNewName = new JButton("Set new Name");
+		btnNewName.setBounds(0, 175, 200, 50);
+		btnNewName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				avatarname = inputBox("Please enter your (new) name", "Avatarname");
+				me.setName(avatarname);
+			}
+		});
+		configFrame.getContentPane().add(btnNewName, BorderLayout.CENTER);
+		lblVersion = new JLabel("Version: "+variante);
+		lblVersion.setBounds(0,20,100,10);
+		configFrame.getContentPane().add(lblVersion, BorderLayout.SOUTH);
+		configFrame.setVisible(true);
 	}
 	
 	private void showCamera(){

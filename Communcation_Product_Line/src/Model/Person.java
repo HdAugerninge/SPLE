@@ -23,4 +23,9 @@ public class Person implements Serializable {
 	public String toString() {
 		return getName();
 	}
+	
+	public void setName(String name){
+		this.name=name;
+		System.out.println("Me name changed to " + name);
+	}
 }
