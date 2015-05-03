@@ -14,6 +14,16 @@ public abstract class Message implements Serializable {
 		this.sender = sender;
 		this.receivers = list;
 	}
+	
+	
+
+	public Person getSender() {
+		return sender;
+	}
+
+	public List<Person> getReceivers() {
+		return receivers;
+	}
 
 	public abstract Object getMessagePaylaod();
 }
