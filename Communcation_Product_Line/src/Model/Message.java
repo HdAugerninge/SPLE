@@ -15,8 +15,6 @@ public abstract class Message implements Serializable {
 		this.receivers = list;
 	}
 	
-	
-
 	public Person getSender() {
 		return sender;
 	}
