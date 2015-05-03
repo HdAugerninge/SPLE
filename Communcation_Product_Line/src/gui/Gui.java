@@ -17,7 +17,12 @@ import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +33,15 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 
+import control.Manager;
 import Model.Person;
+import Model.TextMessage;
 import Model.Variance;
 import Model.mock.MockResources;
 
 public class Gui {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTabbedPane tabbedPane;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
 			imgAdd;
@@ -43,6 +50,7 @@ public class Gui {
 	private String variante, avatarname;
 	private Variance var;
 	private String chatTabLabelHelper = "";
+	private Manager manager;
 	
 //TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
 	
@@ -59,6 +67,7 @@ public class Gui {
 		variante = "Hier könnte Ihre Werbung stehen";
 		avatarname = "Testuser123";
 		var = new Variance();
+		manager = new Manager();
 	}
 
 	public void init() {
@@ -143,6 +152,8 @@ public class Gui {
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setChatValue(getInputValue());
+				TextMessage messageToSend = new TextMessage(new Person("Testuser123"), currentChatTab.getChatPartners(), getInputValue());
+				manager.sendMessage(messageToSend);
 			}
 		});
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);

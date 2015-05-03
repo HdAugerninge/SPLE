@@ -104,4 +104,8 @@ public class ChatTab extends JPanel{
 		chatPartner.forEach((person) -> {names += person.getName() + ", ";});
 		return names.substring(0, names.length() - 2);
 	}
+	
+	public List<Person> getChatPartners() {
+		return chatPartner;
+	}
 }
