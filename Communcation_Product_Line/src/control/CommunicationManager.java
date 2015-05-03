@@ -41,10 +41,7 @@ public class CommunicationManager implements Serializable {
 	}
 
 	public static CommunicationManager getInstance() {
-		if (instance == null) {
-			instance = new CommunicationManager();
-		}
-		return instance;
+		return (null == instance) ? new CommunicationManager() : instance;
 	}
 	
 	public void setOnMessageStorageHasChangedCallbackListener(MessageStorageHasChangedCallback messageStorageHasChangedCallback) {
