@@ -47,7 +47,7 @@ public class MessageSerializer {
 			cnfe.printStackTrace();
 		} finally {
 			try {
-				messageStoragePipeObjectInputStream.close();
+			messageStoragePipeObjectInputStream.close();
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 				throw new RuntimeException("Could not load piped messages. (messageStoragePipeObjectInputStrem was null)");

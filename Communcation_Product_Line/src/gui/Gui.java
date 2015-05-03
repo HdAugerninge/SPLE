@@ -155,9 +155,9 @@ public class Gui {
 		JButton btnSend = new JButton("");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setChatValue(getInputValue());
 				TextMessage messageToSend = new TextMessage(me, currentChatTab.getChatPartners(), getInputValue());
 				manager.sendMessage(messageToSend);
+				setChatValue(getInputValue());
 			}
 		});
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
