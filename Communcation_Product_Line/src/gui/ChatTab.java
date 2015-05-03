@@ -68,12 +68,12 @@ public class ChatTab extends JPanel{
 	
 	// Returns the Content of the textPaneChat Object
 	public String getChat (){
-		return textPaneChat.getText();
+		return textPaneChat.getText().toString();
 	}
 	
 	// Returns the Content of the textPaneInput Object
 	public String getInput (){
-		return textPaneInput.getText();
+		return textPaneInput.getText().toString();
 	}
 	
 	// Sets the Input of the textPaneChat Object
@@ -103,7 +103,6 @@ public class ChatTab extends JPanel{
 		names = me_name + "-->";
 		chatPartner.forEach((person) -> {names += person.getName() + ", ";});
 		return names.substring(0, names.length() - 2);
-		
 	}
 	
 	public List<Person> getChatPartners() {
