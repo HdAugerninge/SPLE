@@ -34,7 +34,7 @@ import Model.mock.MockResources;
 
 public class Gui {
 
-	public JFrame frame;
+	public JFrame frame, configFrame, peopleFrame ;
 	private JTabbedPane tabbedPane;
 	private JLabel lblVersion;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
@@ -67,7 +67,9 @@ public class Gui {
 	}
 
 	public void init() {
-		initialize();
+		initGui();
+		initPeopleList();
+		initConfig();
 		System.out.println("Gui initialized");
 	}
 
@@ -75,7 +77,7 @@ public class Gui {
 	 * Initialize the contents of the frame.
 	 * @wbp.parser.entryPoint
 	 */
-	private void initialize() {
+	private void initGui() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 615, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -216,8 +218,9 @@ public class Gui {
         return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 	
-	private void showPeopleList() {
-		JFrame peopleFrame = new JFrame();
+	private void initPeopleList() {
+		System.out.println("People created");
+		peopleFrame = new JFrame();
 		peopleFrame.getContentPane().setLayout(null);
 		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
 		JList<Person> peopleList = new JList<Person>();
@@ -243,7 +246,6 @@ public class Gui {
 			currentChatTab = new ChatTab(peopleList.getSelectedValuesList(),me);
 			listChatTab.add(currentChatTab);
 			peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
-//			tabbedPane.addTab(chatTabLabelHelper.substring(0, chatTabLabelHelper.length() - 2), currentChatTab);
 			tabbedPane.addTab(currentChatTab.getName(), currentChatTab);
 			tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
 			tabbedPane.invalidate();
@@ -253,13 +255,18 @@ public class Gui {
 			System.out.println("Chat opened with " + currentChatTab.getName());
 		});
 		peopleFrame.getContentPane().add(fireSelectedPeopleBtn);
-		peopleFrame.setVisible(true);
 		peopleList.setVisible(true);
-		
 	}
 	
-	private void showConfig(){
-		JFrame configFrame = new JFrame();
+	private void showPeopleList() {
+		peopleFrame.setVisible(true);
+		//Disables Change Name button
+		configFrame.getContentPane().getComponentAt(0, 175).setEnabled(false);
+	}
+	
+	private void initConfig(){
+		System.out.println("Config created");
+		configFrame = new JFrame();
 		configFrame.getContentPane().setLayout(null);
 		configFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
 		JLabel lbl = new JLabel("Configuration");
@@ -277,6 +284,9 @@ public class Gui {
 		lblVersion = new JLabel("Version: "+variante);
 		lblVersion.setBounds(0,20,100,10);
 		configFrame.getContentPane().add(lblVersion, BorderLayout.SOUTH);
+	}
+	
+	private void showConfig(){
 		configFrame.setVisible(true);
 	}
 	
