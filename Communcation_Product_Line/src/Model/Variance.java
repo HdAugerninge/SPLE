@@ -30,8 +30,7 @@ public class Variance {
 	}
 	
 	public String getVariante(){
-		//TODO
-		return "Hier k�nnte Ihre Werbung stehen";
+		return Config.variant;
 	}
 
 	public boolean hasCamera() {

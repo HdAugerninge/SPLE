@@ -320,7 +320,7 @@ public class Gui {
 		});
 		configFrame.getContentPane().add(btnConfigNewName, BorderLayout.CENTER);
 		JButton btnAvatar1 = new JButton("");
-		btnAvatar1.setToolTipText("�ndern Sie ihr Avatarbild");
+		btnAvatar1.setToolTipText("aendern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar1, BorderLayout.CENTER);
 		JButton btnAvatar2 = new JButton("");
 		btnAvatar2.setToolTipText("aendern Sie ihr Avatarbild");
