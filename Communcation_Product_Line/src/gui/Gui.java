@@ -36,11 +36,11 @@ public class Gui {
 
 	public JFrame frame, configFrame, peopleFrame ;
 	private JTabbedPane tabbedPane;
-	private JLabel lblVersion, lblAvatar;
+	private JLabel lblAvatar, lblCamPartner;
 	private JButton btnConfigNewName, btnSend, btnFile, btnVoice;
 	private JToggleButton tglbtnCam;
 	private ImageIcon imgConfig, imgAvatar, imgSend, imgVoice, imgFile, imgCam,
-			imgAdd, imgAv1, imgAv2;
+			imgAdd, imgAv1, imgAv2, imgWebcam;
 	private Person me;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
@@ -48,6 +48,7 @@ public class Gui {
 	private Variance var;
 	private String chatTabLabelHelper = "";
 	private Manager manager;
+	private Box verticalRightBox;
 	
 //TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
 	
@@ -62,6 +63,7 @@ public class Gui {
 		imgAdd = new ImageIcon(getClass().getResource("Plus-icon-16.png"));
 		imgAv1 = new ImageIcon(getClass().getResource("man-icon.png"));
 		imgAv2 = new ImageIcon(getClass().getResource("woman-icon.png"));
+		imgWebcam = new ImageIcon(getClass().getResource("Webcam.png"));
 		listChatTab = new ArrayList<ChatTab>();
 		variante = "Hier könnte Ihre Werbung stehen";
 		avatarname = "Testuser123";
@@ -96,7 +98,7 @@ public class Gui {
 		
 
 		// Buttons
-		Box verticalRightBox = Box.createVerticalBox();
+		verticalRightBox = Box.createVerticalBox();
 		horizontalBox.add(verticalRightBox);
 
 		Box horizontalTopRightBox = Box.createHorizontalBox();
@@ -109,7 +111,6 @@ public class Gui {
 					@Override
 					public void run() {
 						showPeopleList();
-						//TODO hide all Buttons solange keine Konversation geöffnet ist
 					}
 				});
 			}
@@ -126,7 +127,6 @@ public class Gui {
 					@Override
 					public void run() {
 						showConfig();
-						//TODO hide all Buttons solange keine Konversation geöffnet ist
 					}
 				});
 			}
@@ -140,6 +140,12 @@ public class Gui {
 		lblAvatar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(lblAvatar);
 		lblAvatar.setIcon(imgAvatar);
+		
+		lblCamPartner = new JLabel("");
+		lblCamPartner.setAlignmentX(Component.CENTER_ALIGNMENT);
+		verticalRightBox.add(lblCamPartner);
+		lblCamPartner.setIcon(imgWebcam);
+		lblCamPartner.setVisible(false);
 
 		tglbtnCam = new JToggleButton("");
 		tglbtnCam.addActionListener(new ActionListener() {
@@ -147,9 +153,14 @@ public class Gui {
 				EventQueue.invokeLater(new Runnable() {					
 					@Override
 					public void run() {
-						showCamera();
-						setChatValue("Cam übermittlet");
-						//TODO hide all Buttons solange keine Konversation geöffnet ist
+						
+						if(tglbtnCam.isSelected()){
+							setChatValue("Cam übermittlet");
+							showCamera(true);
+						}else{
+							setChatValue("Cam beendet");
+							showCamera(false);
+						}
 					}
 				});
 			}
@@ -340,14 +351,20 @@ public class Gui {
 				infoBox("Sie verwenden die Version: " + variante, "Versionsnummer");
 			}
 		});
-		configFrame.getContentPane().add(lblVersion, BorderLayout.SOUTH);
+//		configFrame.getContentPane().add(lblVersion, BorderLayout.SOUTH);
 	}
 	
 	private void showConfig(){
 		configFrame.setVisible(true);
 	}
 	
-	private void showCamera(){
-		
+	private void showCamera(boolean enabled){
+		//zweoites bild einbin den ... 
+		if (enabled){
+			lblCamPartner.setVisible(true);
+		}else{
+			lblCamPartner.setVisible(false);
+//			lblCamPartner=null;
+		}
 	}
 }
