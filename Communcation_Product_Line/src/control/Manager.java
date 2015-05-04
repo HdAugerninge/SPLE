@@ -28,6 +28,7 @@ public class Manager implements MessageStorageHasChangedCallback{
 	private ArrayList<TextMessage> messageStorage;
 
 	public Manager() {
+		var = new Variance();
 		this.communicationManager = CommunicationManager.getInstance();
 		this.communicationManager
 				.setOnMessageStorageHasChangedCallbackListener(this);
