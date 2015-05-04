@@ -359,12 +359,14 @@ public class Gui {
 	}
 	
 	private void showCamera(boolean enabled){
-		//zweoites bild einbin den ... 
 		if (enabled){
 			lblCamPartner.setVisible(true);
 		}else{
 			lblCamPartner.setVisible(false);
-//			lblCamPartner=null;
 		}
+	}
+	
+	private void showLogin(){
+		
 	}
 }
