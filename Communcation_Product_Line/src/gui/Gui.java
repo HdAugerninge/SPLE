@@ -24,17 +24,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
-import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
 
 import control.Manager;
 import Model.Person;
 import Model.TextMessage;
-import Model.Variance;
 import Model.mock.MockResources;
 
 public class Gui {
 
-	public JFrame frame, configFrame, peopleFrame ;
+	public JFrame frame, configFrame, peopleFrame;
 	private JTabbedPane tabbedPane;
 	private JLabel lblAvatar, lblCamPartner;
 	private JButton btnConfigNewName, btnSend, btnFile, btnVoice;
@@ -44,30 +42,32 @@ public class Gui {
 	private Person me;
 	private ChatTab currentChatTab;
 	private List<ChatTab> listChatTab;
-	private String variante, avatarname;
-	private Variance var;
+	private String avatarname;
+	//private Variance var;
 	private String chatTabLabelHelper = "";
 	private Manager manager;
 	private Box verticalRightBox;
-	
-//TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
-	
+
+	// TODO getClass().getClassLoader().getResourceAsStream(this.path) for
+	// images, damits als jar klappt
+
 	public Gui() {
-		
+
 		imgConfig = new ImageIcon(getClass().getResource("19-gear-icon-16.png"));
-		imgAvatar = new ImageIcon(getClass().getResource("avatar-default-icon.png"));
-		imgSend = new ImageIcon(getClass().getResource("paper-plane-icon-16.png"));
+		imgAvatar = new ImageIcon(getClass().getResource(
+				"avatar-default-icon.png"));
+		imgSend = new ImageIcon(getClass().getResource(
+				"paper-plane-icon-16.png"));
 		imgVoice = new ImageIcon(getClass().getResource("mic-icon-16.png"));
 		imgFile = new ImageIcon(getClass().getResource("Download-icon-16.png"));
-		imgCam = new ImageIcon(getClass().getResource("App-Facetime-icon-16.png"));
+		imgCam = new ImageIcon(getClass().getResource(
+				"App-Facetime-icon-16.png"));
 		imgAdd = new ImageIcon(getClass().getResource("Plus-icon-16.png"));
 		imgAv1 = new ImageIcon(getClass().getResource("man-icon.png"));
 		imgAv2 = new ImageIcon(getClass().getResource("woman-icon.png"));
 		imgWebcam = new ImageIcon(getClass().getResource("Webcam.png"));
 		listChatTab = new ArrayList<ChatTab>();
-		variante = "Hier könnte Ihre Werbung stehen";
 		avatarname = "Testuser123";
-		var = new Variance();
 		manager = new Manager();
 		me = new Person(avatarname);
 	}
@@ -81,6 +81,7 @@ public class Gui {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
 	 * @wbp.parser.entryPoint
 	 */
 	private void initGui() {
@@ -95,7 +96,6 @@ public class Gui {
 		Box horizontalBox = Box.createHorizontalBox();
 		frame.getContentPane().add(horizontalBox);
 		horizontalBox.add(tabbedPane);
-		
 
 		// Buttons
 		verticalRightBox = Box.createVerticalBox();
@@ -107,10 +107,11 @@ public class Gui {
 		JButton btnAdd = new JButton("");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {					
+				EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						showPeopleList();
+						manager.showPeopleList(peopleFrame, btnConfigNewName,
+								btnSend, btnFile, btnVoice, tglbtnCam);
 					}
 				});
 			}
@@ -118,15 +119,15 @@ public class Gui {
 		btnAdd.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnAdd);
 		btnAdd.setIcon(imgAdd);
-		btnAdd.setVisible(var.hasConversation());
+		btnAdd.setVisible(manager.hasConversation());
 
 		JButton btnConfig = new JButton("");
 		btnConfig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {					
+				EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						showConfig();
+						manager.showConfig(configFrame);
 					}
 				});
 			}
@@ -134,13 +135,13 @@ public class Gui {
 		btnConfig.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalTopRightBox.add(btnConfig);
 		btnConfig.setIcon(imgConfig);
-		btnConfig.setVisible(var.hasConfig());
+		btnConfig.setVisible(manager.hasConfig());
 
 		lblAvatar = new JLabel("");
 		lblAvatar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(lblAvatar);
 		lblAvatar.setIcon(imgAvatar);
-		
+
 		lblCamPartner = new JLabel("");
 		lblCamPartner.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(lblCamPartner);
@@ -150,16 +151,17 @@ public class Gui {
 		tglbtnCam = new JToggleButton("");
 		tglbtnCam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EventQueue.invokeLater(new Runnable() {					
+				EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						
-						if(tglbtnCam.isSelected()){
-							setChatValue("Cam übermittlet");
-							showCamera(true);
-						}else{
-							setChatValue("Cam beendet");
-							showCamera(false);
+						if (tglbtnCam.isSelected()) {
+							manager.setChatValue("Cam übermittlet", avatarname,
+									getCurrentChatTab());
+							manager.showCamera(true, lblCamPartner);
+						} else {
+							manager.setChatValue("Cam beendet", avatarname,
+									getCurrentChatTab());
+							manager.showCamera(false, lblCamPartner);
 						}
 					}
 				});
@@ -168,97 +170,96 @@ public class Gui {
 		tglbtnCam.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalRightBox.add(tglbtnCam);
 		tglbtnCam.setIcon(imgCam);
-		tglbtnCam.setVisible(var.hasCamera());
+		tglbtnCam.setVisible(manager.hasCamera());
 		tglbtnCam.setEnabled(false);
-		tglbtnCam.setToolTipText("Starten Sie eine Koversation um Kamera zu übermitteln!");
+		tglbtnCam
+				.setToolTipText("Starten Sie eine Koversation um Kamera zu übermitteln!");
 		Box horizontalBottomRightBox = Box.createHorizontalBox();
 		verticalRightBox.add(horizontalBottomRightBox);
 
 		btnSend = new JButton("");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TextMessage messageToSend = new TextMessage(me, currentChatTab.getChatPartners(), getInputValue());
+				TextMessage messageToSend = new TextMessage(me, currentChatTab
+						.getChatPartners(), manager
+						.getInputValue(getCurrentChatTab()));
 				manager.sendMessage(messageToSend);
-				setChatValue(getInputValue());
+				manager.setChatValue(
+						manager.getInputValue(getCurrentChatTab()), avatarname,
+						getCurrentChatTab());
 			}
 		});
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnSend.setIcon(imgSend);
 		horizontalBottomRightBox.add(btnSend);
-		btnSend.setVisible(var.hasSend());
+		btnSend.setVisible(manager.hasSend());
 		btnSend.setEnabled(false);
 		btnSend.setToolTipText("Starten Sie eine Koversation um Nachricht zu übermitteln!");
 
 		btnVoice = new JButton("");
 		btnVoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setChatValue("Voice übermittelt");
+				manager.setChatValue("Voice übermittelt", avatarname,
+						getCurrentChatTab());
 			}
 		});
 		btnVoice.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnVoice.setIcon(imgVoice);
 		horizontalBottomRightBox.add(btnVoice);
-		btnVoice.setVisible(var.hasVoice());
+		btnVoice.setVisible(manager.hasVoice());
 		btnVoice.setEnabled(false);
 		btnVoice.setToolTipText("Starten Sie eine Koversation um Sprache zu übermitteln!");
 
 		btnFile = new JButton("");
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setChatValue("File übermittelt");
+				manager.setChatValue("File übermittelt", avatarname,
+						getCurrentChatTab());
 			}
 		});
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnFile.setIcon(imgFile);
 		horizontalBottomRightBox.add(btnFile);
-		btnFile.setVisible(var.hasFile());		
+		btnFile.setVisible(manager.hasFile());
 		btnFile.setEnabled(false);
 		btnFile.setToolTipText("Starten Sie eine Koversation um Datei zu übermitteln!");
-		
-		frame.revalidate();
 
-//		infoBox("Herzlich Willkommen", variante);
+		frame.revalidate();
+		// infoBox("Herzlich Willkommen", variante);
 	}
 
 	// Helpermethods
 	private Integer getSelectedTab() {
-		//System.out.println(tabbedPane.getSelectedIndex());
 		return tabbedPane.getSelectedIndex();
 	}
 
-	private String getInputValue() {
-		return listChatTab.get(getSelectedTab()).getInput();
+	private ChatTab getCurrentChatTab() {
+		return listChatTab.get(getSelectedTab());
 	}
 
-	private void setChatValue(String verlauf) {
-//		System.out.println(getSelectedTab());
-//		ChatTab temp = listChatTab.get(getSelectedTab());
-//		System.out.println(temp.getName());
-//		temp.setChat(avatarname + "] " + verlauf);
-//		System.out.println(temp.getInput());
-		listChatTab.get(getSelectedTab()).setChat(avatarname + "] " + verlauf);
-		
+	private void infoBox(String infoMessage, String titleBar) {
+		JOptionPane.showMessageDialog(null, infoMessage, titleBar,
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	private void infoBox(String infoMessage, String titleBar){
-        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
-    }
-	
-	private String inputBox(String infoMessage, String titleBar){
-        return JOptionPane.showInputDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
-    }
-	
+	private String inputBox(String infoMessage, String titleBar) {
+		return JOptionPane.showInputDialog(null, infoMessage, titleBar,
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	// Init Methods for new Windows
 	private void initPeopleList() {
 		System.out.println("People created");
 		peopleFrame = new JFrame();
 		peopleFrame.getContentPane().setLayout(null);
-		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
+		peopleFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY()
+				+ frame.getHeight() / 2, 200, 250);
 		JList<Person> peopleList = new JList<Person>();
-		if(var.hasMultiCast()){
-			//Decision if conversation can be started with many
+		if (manager.hasMultiCast()) {
+			// Decision if conversation can be started with many
 			peopleList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		}else{
-			//or only one person
+		} else {
+			// or only one person
 			peopleList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		}
 		peopleList.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -271,47 +272,45 @@ public class Gui {
 		JButton fireSelectedPeopleBtn = new JButton();
 		fireSelectedPeopleBtn.setBounds(0, 175, 200, 50);
 		fireSelectedPeopleBtn.setText("Chat starten");
-		fireSelectedPeopleBtn.addActionListener((event) -> {
-			chatTabLabelHelper = "";
-			currentChatTab = new ChatTab(peopleList.getSelectedValuesList(),me);
-			listChatTab.add(currentChatTab);
-			peopleList.getSelectedValuesList().forEach((person) -> chatTabLabelHelper += person.getName() + ", ");
-			tabbedPane.addTab(currentChatTab.getName(), currentChatTab);
-			tabbedPane.setSelectedIndex(tabbedPane.indexOfComponent(currentChatTab));
-			tabbedPane.invalidate();
-			tabbedPane.repaint();
-			tabbedPane.updateUI();
-			peopleFrame.setVisible(false);
-			System.out.println("Chat opened with " + currentChatTab.getName());
-		});
+		fireSelectedPeopleBtn
+				.addActionListener((event) -> {
+					chatTabLabelHelper = "";
+					currentChatTab = new ChatTab(peopleList.getSelectedValuesList(), me);
+					listChatTab.add(currentChatTab);
+					peopleList.getSelectedValuesList().forEach(
+							(person) -> chatTabLabelHelper += person.getName()
+									+ ", ");
+					tabbedPane.addTab(currentChatTab.getName(), currentChatTab);
+					tabbedPane.setSelectedIndex(tabbedPane
+							.indexOfComponent(currentChatTab));
+					tabbedPane.invalidate();
+					tabbedPane.repaint();
+					tabbedPane.updateUI();
+					peopleFrame.setVisible(false);
+					System.out.println("Chat opened with "
+							+ currentChatTab.getName());
+				});
 		peopleFrame.getContentPane().add(fireSelectedPeopleBtn);
 		peopleList.setVisible(true);
 	}
-	
-	private void showPeopleList() {
-		peopleFrame.setVisible(true);
-		//Disables Change Name button
-		btnConfigNewName.setEnabled(false);
-		btnSend.setEnabled(true);
-		btnFile.setEnabled(true);
-		btnVoice.setEnabled(true);
-		tglbtnCam.setEnabled(true);		
-	}
-	
-	private void initConfig(){
+
+	private void initConfig() {
 		System.out.println("Config created");
 		configFrame = new JFrame();
 		configFrame.getContentPane().setLayout(null);
-		configFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY() + frame.getHeight() / 2, 200, 250);
+		configFrame.setBounds(frame.getX() + frame.getWidth() / 2, frame.getY()
+				+ frame.getHeight() / 2, 200, 250);
 		JLabel lbl = new JLabel("Configuration");
-		lbl.setBounds(0,0,100,10);
+		lbl.setBounds(0, 0, 100, 10);
 		configFrame.getContentPane().add(lbl, BorderLayout.NORTH);
 		btnConfigNewName = new JButton("Set new Name");
-		btnConfigNewName.setToolTipText("Nur änderbar solange keine Konversation gestartet wurde");
+		btnConfigNewName
+				.setToolTipText("Nur änderbar solange keine Konversation gestartet wurde");
 		btnConfigNewName.setBounds(0, 175, 200, 50);
 		btnConfigNewName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				avatarname = inputBox("Please enter your (new) name", "Avatarname");
+				avatarname = inputBox("Please enter your (new) name",
+						"Avatarname");
 				me.setName(avatarname);
 			}
 		});
@@ -322,19 +321,19 @@ public class Gui {
 		JButton btnAvatar2 = new JButton("");
 		btnAvatar2.setToolTipText("Ändern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar2, BorderLayout.CENTER);
-		btnAvatar1.setBounds(0,30,100,130);
+		btnAvatar1.setBounds(0, 30, 100, 130);
 		btnAvatar1.setIcon(imgAv1);
-		btnAvatar1.addActionListener(new ActionListener() {	
+		btnAvatar1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon temp = (ImageIcon) lblAvatar.getIcon();
 				lblAvatar.setIcon(btnAvatar1.getIcon());
 				btnAvatar1.setIcon(temp);
 			}
-		});		
-		btnAvatar2.setBounds(100,30,100,130);
+		});
+		btnAvatar2.setBounds(100, 30, 100, 130);
 		btnAvatar2.setIcon(imgAv2);
-		btnAvatar2.addActionListener(new ActionListener() {	
+		btnAvatar2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon temp = (ImageIcon) lblAvatar.getIcon();
@@ -344,29 +343,18 @@ public class Gui {
 		});
 		JButton btnVersion = new JButton("Zeige Version");
 		configFrame.getContentPane().add(btnVersion, BorderLayout.CENTER);
-		btnVersion.setBounds(0,10,200,20);
-		btnVersion.addActionListener(new ActionListener() {	
+		btnVersion.setBounds(0, 10, 200, 20);
+		btnVersion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				infoBox("Sie verwenden die Version: " + variante, "Versionsnummer");
+				infoBox("Sie verwenden die Version: " + manager.getVarante(),
+						"Versionsnummer");
 			}
 		});
-//		configFrame.getContentPane().add(lblVersion, BorderLayout.SOUTH);
 	}
-	
-	private void showConfig(){
-		configFrame.setVisible(true);
+
+	private void initLogin() {
+		//TODO
 	}
-	
-	private void showCamera(boolean enabled){
-		if (enabled){
-			lblCamPartner.setVisible(true);
-		}else{
-			lblCamPartner.setVisible(false);
-		}
-	}
-	
-	private void showLogin(){
-		
-	}
+
 }

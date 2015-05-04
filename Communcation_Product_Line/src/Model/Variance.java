@@ -28,6 +28,11 @@ public class Variance {
 		}
 		return new DefaultEncryption();
 	}
+	
+	public String getVariante(){
+		//TODO
+		return "Hier könnte Ihre Werbung stehen";
+	}
 
 	public boolean hasCamera() {
 		return  (config.getBinding("camera").toString().equals("1") );
@@ -59,8 +64,9 @@ public class Variance {
 	}
 
 	public boolean hasConversation() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+	
+	
 
 }
