@@ -155,7 +155,7 @@ public class Gui {
 					@Override
 					public void run() {
 						if (tglbtnCam.isSelected()) {
-							manager.setChatValue("Cam �bermittlet", avatarname,
+							manager.setChatValue("Cam uebermittlet", avatarname,
 									getCurrentChatTab());
 							manager.showCamera(true, lblCamPartner);
 						} else {
@@ -173,7 +173,7 @@ public class Gui {
 		tglbtnCam.setVisible(manager.hasCamera());
 		tglbtnCam.setEnabled(false);
 		tglbtnCam
-				.setToolTipText("Starten Sie eine Koversation um Kamera zu �bermitteln!");
+				.setToolTipText("Starten Sie eine Koversation um Kamera zu uebermitteln!");
 		Box horizontalBottomRightBox = Box.createHorizontalBox();
 		verticalRightBox.add(horizontalBottomRightBox);
 
@@ -194,7 +194,7 @@ public class Gui {
 		horizontalBottomRightBox.add(btnSend);
 		btnSend.setVisible(manager.hasSend());
 		btnSend.setEnabled(false);
-		btnSend.setToolTipText("Starten Sie eine Koversation um Nachricht zu �bermitteln!");
+		btnSend.setToolTipText("Starten Sie eine Koversation um Nachricht zu uebermitteln!");
 
 		btnVoice = new JButton("");
 		btnVoice.addActionListener(new ActionListener() {
@@ -208,7 +208,7 @@ public class Gui {
 		horizontalBottomRightBox.add(btnVoice);
 		btnVoice.setVisible(manager.hasVoice());
 		btnVoice.setEnabled(false);
-		btnVoice.setToolTipText("Starten Sie eine Koversation um Sprache zu �bermitteln!");
+		btnVoice.setToolTipText("Starten Sie eine Koversation um Sprache zu uebermitteln!");
 
 		btnFile = new JButton("");
 		btnFile.addActionListener(new ActionListener() {
@@ -222,7 +222,7 @@ public class Gui {
 		horizontalBottomRightBox.add(btnFile);
 		btnFile.setVisible(manager.hasFile());
 		btnFile.setEnabled(false);
-		btnFile.setToolTipText("Starten Sie eine Koversation um Datei zu �bermitteln!");
+		btnFile.setToolTipText("Starten Sie eine Koversation um Datei zu uebermitteln!");
 
 		frame.revalidate();
 		// infoBox("Herzlich Willkommen", variante);
@@ -309,7 +309,7 @@ public class Gui {
 		configFrame.getContentPane().add(lbl, BorderLayout.NORTH);
 		btnConfigNewName = new JButton("Set new Name");
 		btnConfigNewName
-				.setToolTipText("Nur �nderbar solange keine Konversation gestartet wurde");
+				.setToolTipText("Nur aenderbar solange keine Konversation gestartet wurde");
 		btnConfigNewName.setBounds(0, 175, 200, 50);
 		btnConfigNewName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -323,7 +323,7 @@ public class Gui {
 		btnAvatar1.setToolTipText("�ndern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar1, BorderLayout.CENTER);
 		JButton btnAvatar2 = new JButton("");
-		btnAvatar2.setToolTipText("�ndern Sie ihr Avatarbild");
+		btnAvatar2.setToolTipText("aendern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar2, BorderLayout.CENTER);
 		btnAvatar1.setBounds(0, 30, 100, 130);
 		btnAvatar1.setIcon(imgAv1);

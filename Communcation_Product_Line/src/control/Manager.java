@@ -3,11 +3,10 @@ package control;
 import gui.ChatTab;
 import gui.Gui;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.lang.model.element.VariableElement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
