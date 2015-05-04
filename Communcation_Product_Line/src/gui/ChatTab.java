@@ -87,6 +87,10 @@ public class ChatTab extends JPanel{
 		clearInput();
 	}
 	
+	public void clearChat() {
+		textPaneChat.setText("");
+	}
+	
 	// Sets the Input of the TextPaneInput Object
 	public void setInput (String text){
 		textPaneInput.setText(text);

@@ -51,7 +51,7 @@ public class Gui {
 	// TODO getClass().getClassLoader().getResourceAsStream(this.path) for
 	// images, damits als jar klappt
 
-	public Gui() {
+	public Gui(Person me) {
 
 		imgConfig = new ImageIcon(getClass().getResource("19-gear-icon-16.png"));
 		imgAvatar = new ImageIcon(getClass().getResource(
@@ -64,12 +64,12 @@ public class Gui {
 				"App-Facetime-icon-16.png"));
 		imgAdd = new ImageIcon(getClass().getResource("Plus-icon-16.png"));
 		imgAv1 = new ImageIcon(getClass().getResource("man-icon.png"));
-		imgAv2 = new ImageIcon(getClass().getResource("woman-icon.png"));
+		imgAv2 = new ImageIcon(getClass().getResource("woman-icon.png"))	;
 		imgWebcam = new ImageIcon(getClass().getResource("Webcam.png"));
 		listChatTab = new ArrayList<ChatTab>();
-		avatarname = "Testuser123";
-		manager = new Manager();
-		me = new Person(avatarname);
+		this.me = me;
+		avatarname = me.getName();
+		manager = new Manager(this, me);
 	}
 
 	public void init() {
@@ -155,7 +155,7 @@ public class Gui {
 					@Override
 					public void run() {
 						if (tglbtnCam.isSelected()) {
-							manager.setChatValue("Cam übermittlet", avatarname,
+							manager.setChatValue("Cam ï¿½bermittlet", avatarname,
 									getCurrentChatTab());
 							manager.showCamera(true, lblCamPartner);
 						} else {
@@ -173,7 +173,7 @@ public class Gui {
 		tglbtnCam.setVisible(manager.hasCamera());
 		tglbtnCam.setEnabled(false);
 		tglbtnCam
-				.setToolTipText("Starten Sie eine Koversation um Kamera zu übermitteln!");
+				.setToolTipText("Starten Sie eine Koversation um Kamera zu ï¿½bermitteln!");
 		Box horizontalBottomRightBox = Box.createHorizontalBox();
 		verticalRightBox.add(horizontalBottomRightBox);
 
@@ -184,9 +184,9 @@ public class Gui {
 						.getChatPartners(), manager
 						.getInputValue(getCurrentChatTab()));
 				manager.sendMessage(messageToSend);
-				manager.setChatValue(
-						manager.getInputValue(getCurrentChatTab()), avatarname,
-						getCurrentChatTab());
+		//		manager.setChatValue(
+			//			manager.getInputValue(getCurrentChatTab()), avatarname,
+				//		getCurrentChatTab());
 			}
 		});
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -194,12 +194,12 @@ public class Gui {
 		horizontalBottomRightBox.add(btnSend);
 		btnSend.setVisible(manager.hasSend());
 		btnSend.setEnabled(false);
-		btnSend.setToolTipText("Starten Sie eine Koversation um Nachricht zu übermitteln!");
+		btnSend.setToolTipText("Starten Sie eine Koversation um Nachricht zu ï¿½bermitteln!");
 
 		btnVoice = new JButton("");
 		btnVoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setChatValue("Voice übermittelt", avatarname,
+				manager.setChatValue("Voice ï¿½bermittelt", avatarname,
 						getCurrentChatTab());
 			}
 		});
@@ -208,12 +208,12 @@ public class Gui {
 		horizontalBottomRightBox.add(btnVoice);
 		btnVoice.setVisible(manager.hasVoice());
 		btnVoice.setEnabled(false);
-		btnVoice.setToolTipText("Starten Sie eine Koversation um Sprache zu übermitteln!");
+		btnVoice.setToolTipText("Starten Sie eine Koversation um Sprache zu ï¿½bermitteln!");
 
 		btnFile = new JButton("");
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setChatValue("File übermittelt", avatarname,
+				manager.setChatValue("File ï¿½bermittelt", avatarname,
 						getCurrentChatTab());
 			}
 		});
@@ -222,7 +222,7 @@ public class Gui {
 		horizontalBottomRightBox.add(btnFile);
 		btnFile.setVisible(manager.hasFile());
 		btnFile.setEnabled(false);
-		btnFile.setToolTipText("Starten Sie eine Koversation um Datei zu übermitteln!");
+		btnFile.setToolTipText("Starten Sie eine Koversation um Datei zu ï¿½bermitteln!");
 
 		frame.revalidate();
 		// infoBox("Herzlich Willkommen", variante);
@@ -276,6 +276,10 @@ public class Gui {
 				.addActionListener((event) -> {
 					chatTabLabelHelper = "";
 					currentChatTab = new ChatTab(peopleList.getSelectedValuesList(), me);
+					if(!listChatTab.isEmpty()) {
+						listChatTab.remove(0);
+						tabbedPane.remove(0);
+					}
 					listChatTab.add(currentChatTab);
 					peopleList.getSelectedValuesList().forEach(
 							(person) -> chatTabLabelHelper += person.getName()
@@ -305,7 +309,7 @@ public class Gui {
 		configFrame.getContentPane().add(lbl, BorderLayout.NORTH);
 		btnConfigNewName = new JButton("Set new Name");
 		btnConfigNewName
-				.setToolTipText("Nur änderbar solange keine Konversation gestartet wurde");
+				.setToolTipText("Nur ï¿½nderbar solange keine Konversation gestartet wurde");
 		btnConfigNewName.setBounds(0, 175, 200, 50);
 		btnConfigNewName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -316,10 +320,10 @@ public class Gui {
 		});
 		configFrame.getContentPane().add(btnConfigNewName, BorderLayout.CENTER);
 		JButton btnAvatar1 = new JButton("");
-		btnAvatar1.setToolTipText("Ändern Sie ihr Avatarbild");
+		btnAvatar1.setToolTipText("ï¿½ndern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar1, BorderLayout.CENTER);
 		JButton btnAvatar2 = new JButton("");
-		btnAvatar2.setToolTipText("Ändern Sie ihr Avatarbild");
+		btnAvatar2.setToolTipText("ï¿½ndern Sie ihr Avatarbild");
 		configFrame.getContentPane().add(btnAvatar2, BorderLayout.CENTER);
 		btnAvatar1.setBounds(0, 30, 100, 130);
 		btnAvatar1.setIcon(imgAv1);
@@ -355,6 +359,11 @@ public class Gui {
 
 	private void initLogin() {
 		//TODO
+	}
+
+	public List<ChatTab> getChatTabs() {
+		// TODO Auto-generated method stub
+		return listChatTab;
 	}
 
 }

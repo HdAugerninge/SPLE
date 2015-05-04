@@ -1,6 +1,7 @@
 package control;
 
 import gui.ChatTab;
+import gui.Gui;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
 import control.CommunicationManager.MessageStorageHasChangedCallback;
+import Model.Person;
 import Model.TextMessage;
 import Model.Variance;
 
@@ -20,18 +22,22 @@ import Model.Variance;
  * This class implements the events fired by the GUI component. It controls the
  * basic control flow. Created by Tobias on 25.04.2015.
  */
-public class Manager implements MessageStorageHasChangedCallback{
+public class Manager implements MessageStorageHasChangedCallback {
 
 	private CommunicationManager communicationManager;
 	private Variance var;
+	private Gui gui;
+	private Person me;
 	@SuppressWarnings("unused")
 	private ArrayList<TextMessage> messageStorage;
 
-	public Manager() {
+	public Manager(Gui gui, Person me) {
 		var = new Variance();
 		this.communicationManager = CommunicationManager.getInstance();
 		this.communicationManager
 				.setOnMessageStorageHasChangedCallbackListener(this);
+		this.gui = gui;
+		this.me = me;
 	}
 
 	public void sendMessage(TextMessage messageToSend) {
@@ -78,34 +84,72 @@ public class Manager implements MessageStorageHasChangedCallback{
 	public void onMessageStorageHasChanged(List<TextMessage> messageStorage) {
 		// Do Something with synchronized messages
 		System.out.println("onMessageStorageHasChanged called!");
+
+		List<gui.ChatTab> tabs = gui.getChatTabs();
+
+		for(ChatTab tab : tabs) {
+			tab.clearChat();
+		}
+		for (TextMessage m : messageStorage) {
+			List<Person> receivers = m.getReceivers();
+			if(m.getSender().equals(me)) {
+				for (gui.ChatTab t : tabs) {
+					if (t.getChatPartners().equals(receivers)) {
+						t.setChat(m.getSender() + "] " + m.getMessagePaylaod());
+					}
+				}
+			}
+			// suche ob aktueller User Empfänger der Nachricht ist
+			System.out.println("Me: " + me.getName());
+			if(m.getReceivers().contains(me)) {
+				System.out.println("other");
+				List<Person> myReceivers = new ArrayList<Person>();
+				myReceivers.add(m.getSender());
+				List<Person> tempReceivers = new ArrayList<Person>(m.getReceivers());
+				tempReceivers.remove(me);
+				myReceivers.addAll(myReceivers);
+				for (gui.ChatTab t : tabs) {
+					//if (t.getChatPartners().contains(tempReceivers)) {
+						System.out.println("Me: " + me.getName() + " them: "+ m.getReceivers().get(0) + " message: " + m.getMessagePaylaod());
+						t.setChat(m.getSender() + "] " + m.getMessagePaylaod());
+					//}
+				}
+			}	
+		}
 	}
-	
-	//Variantenbinding
-	
-	public String getVarante(){
+
+	// Variantenbinding
+
+	public String getVarante() {
 		return var.getVariante();
 	}
-	public boolean hasConfig(){
+
+	public boolean hasConfig() {
 		return var.hasConfig();
 	}
-	public boolean hasCamera(){
+
+	public boolean hasCamera() {
 		return var.hasCamera();
 	}
-	public boolean hasSend(){
+
+	public boolean hasSend() {
 		return var.hasSend();
 	}
-	public boolean hasVoice(){
+
+	public boolean hasVoice() {
 		return var.hasVoice();
 	}
-	public boolean hasFile(){
+
+	public boolean hasFile() {
 		return var.hasFile();
 	}
-	public boolean hasMultiCast(){
+
+	public boolean hasMultiCast() {
 		return var.hasMultiCast();
 	}
-	public boolean hasConversation(){
+
+	public boolean hasConversation() {
 		return var.hasConversation();
 	}
-	
 
 }

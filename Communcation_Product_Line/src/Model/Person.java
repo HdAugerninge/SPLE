@@ -28,4 +28,10 @@ public class Person implements Serializable {
 		this.name=name;
 		System.out.println("Me name changed to " + name);
 	}
+	@Override
+	 public boolean equals(Object other){
+		if(other instanceof Person)
+		  return this.name.equals(((Person)other).name);
+		else return false;
+	}
 }

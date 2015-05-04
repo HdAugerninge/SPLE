@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 
 import config.Config;
 import gui.Gui;
+import gui.Login;
 //package Gui;
 //import Gui;
 
@@ -33,47 +34,8 @@ public class Main {
 				try {
 					UIManager.setLookAndFeel(
 				            UIManager.getSystemLookAndFeelClassName());
-					Gui window = new Gui();
-					window.init();
-					
-					window.frame.addWindowListener(new WindowListener() {
-						
-						@Override
-						public void windowOpened(WindowEvent e) {				
-						}
-						
-						@Override
-						public void windowIconified(WindowEvent e) {				
-						}
-						
-						@Override
-						public void windowDeiconified(WindowEvent e) {				
-						}
-						
-						@Override
-						public void windowDeactivated(WindowEvent e) {				
-						}
-						
-						@Override
-						public void windowClosing(WindowEvent e) {		
-							try {
-								//Variationspunkt einbringen
-								Files.deleteIfExists(Paths.get(System.getProperty("java.io.tmpdir") + File.separator + "messagepipe.bin"));
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-						}
-						
-						@Override
-						public void windowClosed(WindowEvent e) {
-
-						}
-						
-						@Override
-						public void windowActivated(WindowEvent e) {				
-						}
-					});
-				
+					Login login = new Login();
+					login.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
