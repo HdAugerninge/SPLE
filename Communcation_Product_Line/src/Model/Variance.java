@@ -31,7 +31,7 @@ public class Variance {
 	
 	public String getVariante(){
 		//TODO
-		return "Hier könnte Ihre Werbung stehen";
+		return "Hier kï¿½nnte Ihre Werbung stehen";
 	}
 
 	public boolean hasCamera() {
@@ -39,7 +39,7 @@ public class Variance {
 	}
 	
 	public boolean hasAuthentification() {
-		return  (config.getBinding("athentification").toString().equals("1"));
+		return  (config.getBinding("authentification").toString().equals("1"));
 	}
 
 	public boolean hasHistory() {
