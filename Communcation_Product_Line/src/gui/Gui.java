@@ -47,11 +47,9 @@ public class Gui {
 	private String variante, avatarname;
 	private Variance var;
 	private String chatTabLabelHelper = "";
-	private Manager manager;
-	
 //TODO  getClass().getClassLoader().getResourceAsStream(this.path) for images, damits als jar klappt
 	
-	public Gui() {
+	public Gui(Person me) {
 		
 		imgConfig = new ImageIcon(getClass().getResource("19-gear-icon-16.png"));
 		imgAvatar = new ImageIcon(getClass().getResource("avatar-default-icon.png"));
@@ -64,19 +62,31 @@ public class Gui {
 		imgAv2 = new ImageIcon(getClass().getResource("woman-icon.png"));
 		listChatTab = new ArrayList<ChatTab>();
 		variante = "Hier könnte Ihre Werbung stehen";
-		avatarname = "Testuser123";
+	
 		var = new Variance();
-		manager = new Manager();
-		me = new Person(avatarname);
+		this.me = me;
 	}
 
+	
+	public void addSendOnClick(Manager manager){
+		System.out.println("in add send");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TextMessage messageToSend = new TextMessage(me, currentChatTab.getChatPartners(), getInputValue());
+				manager.sendMessage(messageToSend);
+				setChatValue(getInputValue());
+			}
+		});
+	}
+	
 	public void init() {
 		initGui();
 		initPeopleList();
 		initConfig();
 		System.out.println("Gui initialized");
 	}
-
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 * @wbp.parser.entryPoint
@@ -164,13 +174,7 @@ public class Gui {
 		verticalRightBox.add(horizontalBottomRightBox);
 
 		btnSend = new JButton("");
-		btnSend.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TextMessage messageToSend = new TextMessage(me, currentChatTab.getChatPartners(), getInputValue());
-				manager.sendMessage(messageToSend);
-				setChatValue(getInputValue());
-			}
-		});
+
 		btnSend.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnSend.setIcon(imgSend);
 		horizontalBottomRightBox.add(btnSend);
@@ -225,10 +229,22 @@ public class Gui {
 //		System.out.println(temp.getName());
 //		temp.setChat(avatarname + "] " + verlauf);
 //		System.out.println(temp.getInput());
-		listChatTab.get(getSelectedTab()).setChat(avatarname + "] " + verlauf);
+		listChatTab.get(getSelectedTab()).setChat(me.getName() + "] " + verlauf);
 		
 	}
-
+	public List<ChatTab> getChatTabs(){
+		return listChatTab;
+	}
+	/*
+	public void setReceivedChatValue(TextMessage message){
+		int index = getSelectedTab();
+		//TODO richtigen index über people list finden
+		if(index==-1)index=0;
+		
+		listChatTab.get(index).setChat(me.getName()+ "] " + message);
+		
+	}*/
+	
 	private void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }

@@ -80,7 +80,7 @@ public class ChatTab extends JPanel{
 	public void setChat (String text){
 		// Creating Timestamp
 		Calendar cal = Calendar.getInstance();
-		cal.getTime();
+	//	cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		// Setting actual Textoutput
 		textPaneChat.setText(getChat () + "\n[" + sdf.format(cal.getTime()) + " " + text);
@@ -108,4 +108,5 @@ public class ChatTab extends JPanel{
 	public List<Person> getChatPartners() {
 		return chatPartner;
 	}
+	
 }

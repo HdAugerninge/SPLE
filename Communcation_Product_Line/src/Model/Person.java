@@ -28,4 +28,8 @@ public class Person implements Serializable {
 		this.name=name;
 		System.out.println("Me name changed to " + name);
 	}
+	
+	public boolean equals(Person other){
+		return this.name.equals(other.name);
+	}
 }

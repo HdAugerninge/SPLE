@@ -59,14 +59,14 @@ public class CommunicationManager implements Serializable {
 		@Override
 		public void run() {
 			while(true) {
-				System.out.println("Slept.");
+			//	System.out.println("Slept.");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				messageStorage = (List<TextMessage>) messageSerializer.loadMessagesFromPipe();
-				messageStorage.forEach((message) -> System.out.println(message.toString()));
+			//	messageStorage.forEach((message) -> System.out.println(message.toString()));
 				if(size != messageStorage.size()) {
 					messageStorageHasChangedCallback.onMessageStorageHasChanged(messageStorage);
 					size = messageStorage.size();

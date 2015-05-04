@@ -9,10 +9,10 @@ import java.nio.file.Paths;
 
 import javax.swing.UIManager;
 
+import Model.Person;
 import config.Config;
 import gui.Gui;
-//package Gui;
-//import Gui;
+
 
 
 public class Main {
@@ -28,14 +28,20 @@ public class Main {
 		Config.variant = variant;
 	//	System.out.println(new Variance().hasCamera());
 	//	System.out.println(Config.getInstance().getAllBindings());
-		
+		String avatarname = "Beate"; //TODO übergeben
+		Person me = new Person(avatarname);
+		System.out.println(me);
 		// TODO Auto-generated method stub#
+		Gui window = null;
 				try {
 					UIManager.setLookAndFeel(
 				            UIManager.getSystemLookAndFeelClassName());
-					Gui window = new Gui();
-					window.init();
 					
+				
+					
+				
+					window = new Gui(me);
+					window.init();
 					window.frame.addWindowListener(new WindowListener() {
 						
 						@Override
@@ -78,6 +84,9 @@ public class Main {
 					e.printStackTrace();
 				}
 		
+				Manager manager = new Manager(window,me);
+				System.out.println("check");
+				window.addSendOnClick(manager);//initialize send button
 	}
 
 }
