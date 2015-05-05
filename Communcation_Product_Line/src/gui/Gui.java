@@ -155,7 +155,7 @@ public class Gui {
 					@Override
 					public void run() {
 						if (tglbtnCam.isSelected()) {
-							manager.setChatValue("Cam uebermittlet", avatarname,
+							manager.setChatValue("Cam übermittelt", avatarname,
 									getCurrentChatTab());
 							manager.showCamera(true, lblCamPartner);
 						} else {
