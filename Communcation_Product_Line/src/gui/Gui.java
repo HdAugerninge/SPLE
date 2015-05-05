@@ -199,8 +199,9 @@ public class Gui {
 		btnVoice = new JButton("");
 		btnVoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setChatValue("Voice ï¿½bermittelt", avatarname,
-						getCurrentChatTab());
+				TextMessage messageToSend = new TextMessage(me, currentChatTab
+						.getChatPartners(), "Voice übermittelt.");
+				manager.sendMessage(messageToSend);
 			}
 		});
 		btnVoice.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -213,8 +214,9 @@ public class Gui {
 		btnFile = new JButton("");
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manager.setChatValue("File ï¿½bermittelt", avatarname,
-						getCurrentChatTab());
+				TextMessage messageToSend = new TextMessage(me, currentChatTab
+						.getChatPartners(), "Datei übermittelt.");
+				manager.sendMessage(messageToSend);
 			}
 		});
 		btnFile.setAlignmentX(Component.CENTER_ALIGNMENT);
