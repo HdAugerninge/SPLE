@@ -26,7 +26,6 @@ public class ChatTab extends JPanel{
 	String me_name = "";
 	// Create TextPanes for Chat Tab
 	private JTextPane textPaneChat, textPaneInput;
-	
 	// Creates a new ChatTab
 	public ChatTab(List<Person> chatPartner,Person me) {
 		this.chatPartner = chatPartner;
@@ -46,7 +45,8 @@ public class ChatTab extends JPanel{
 		setBounds(0, 0, 449, 300);		
 		JScrollPane scrollPaneChat = new JScrollPane();
 		scrollPaneChat.setBounds(10, 11, 430, 126);
-		add(scrollPaneChat);		
+		add(scrollPaneChat);
+		
 		textPaneChat = new JTextPane();
 		textPaneChat.setEditable(false);
 		scrollPaneChat.setViewportView(textPaneChat);		
@@ -58,7 +58,7 @@ public class ChatTab extends JPanel{
 		
 		textPaneInput = new JTextPane();
 		scrollPaneInput.setViewportView(textPaneInput);
-		
+		scrollPaneChat.setAutoscrolls(true);
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 148, 430, 4);
 		add(horizontalStrut);
@@ -85,6 +85,9 @@ public class ChatTab extends JPanel{
 		// Setting actual Textoutput
 		textPaneChat.setText(getChat () + "\n[" + sdf.format(cal.getTime()) + " " + text);
 		clearInput();
+		// Jump to Bottom after every Message
+		textPaneChat.selectAll();
+		textPaneChat.select(textPaneChat.getSelectionEnd(),textPaneChat.getSelectionEnd());
 	}
 	
 	public void clearChat() {
