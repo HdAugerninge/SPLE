@@ -108,10 +108,8 @@ public class Manager implements MessageStorageHasChangedCallback {
 				tempReceivers.remove(me);
 				myReceivers.addAll(myReceivers);
 				for (gui.ChatTab t : tabs) {
-					//if (t.getChatPartners().contains(tempReceivers)) {
 						System.out.println("Me: " + me.getName() + " them: "+ m.getReceivers().get(0) + " message: " + m.getMessagePaylaod());
 						t.setChat(m.getSender() + "] " + m.getMessagePaylaod());
-					//}
 				}
 			}	
 		}

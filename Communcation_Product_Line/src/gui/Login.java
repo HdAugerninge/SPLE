@@ -46,15 +46,12 @@ public class Login extends JFrame {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				try {
-					// Variationspunkt einbringen
-					Files.deleteIfExists(Paths.get(System
+			
+					new File(System
 							.getProperty("java.io.tmpdir")
 							+ File.separator
-							+ "messagepipe.bin"));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+							+ "messagepipe.bin").deleteOnExit();
+				
 			}
 
 			@Override
